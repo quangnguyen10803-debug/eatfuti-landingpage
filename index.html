@@ -40,6 +40,8 @@
     <symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
     <symbol id="i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
   </defs>
 </svg>
 
@@ -138,9 +140,61 @@
         </div>
       </div>
 
-      <!-- Product preview -->
+      <!-- Product preview — hand-built UI illustration -->
       <div class="hero-mock reveal">
-        <img src="assets/hero-image.png" alt="EatFuti app — online ordering, loyalty, and analytics in one platform" class="hero-mockup-img">
+        <div class="hero-scene" role="img" aria-label="EatFuti branded ordering app with live sales and loyalty stats">
+          <div class="ui-phone">
+            <div class="ui-island"></div>
+            <div class="ui-screen">
+              <div class="ui-status"><span class="ui-time">9:41</span><span class="ui-sig"><i></i><i></i><i></i></span></div>
+              <div class="ui-appbar">
+                <span class="ui-applogo"><img src="assets/logo-symbol-yellow.png" alt=""></span>
+                <div class="ui-apptitle"><b>Phở Hà Nội</b><small>Order direct · zero commission</small></div>
+                <span class="ui-cart"><svg class="icon"><use href="#i-bag"/></svg><i>2</i></span>
+              </div>
+              <div class="ui-banner">
+                <span class="ui-banner-tag">Today's Special</span>
+                <b>Bún Chả Hà Nội</b>
+                <small>Free delivery on orders over $25</small>
+              </div>
+              <div class="ui-cats"><span class="active">Phở</span><span>Bún</span><span>Bánh Mì</span><span>Drinks</span></div>
+              <div class="ui-item">
+                <span class="ui-thumb th-a"></span>
+                <div class="ui-item-info"><b>Phở Bò Tái</b><small>Rice noodle · rare beef</small></div>
+                <span class="ui-price">$14.50</span>
+              </div>
+              <div class="ui-item">
+                <span class="ui-thumb th-b"></span>
+                <div class="ui-item-info"><b>Bún Chả</b><small>Grilled pork · herbs</small></div>
+                <span class="ui-qty">2</span>
+              </div>
+              <div class="ui-item">
+                <span class="ui-thumb th-c"></span>
+                <div class="ui-item-info"><b>Gỏi Cuốn</b><small>Fresh spring rolls</small></div>
+                <span class="ui-price">$8.50</span>
+              </div>
+              <button class="ui-checkout"><span>Checkout · 2 items</span><b>$27.50</b></button>
+            </div>
+          </div>
+
+          <div class="fl-card fl-sales">
+            <div class="fl-label"><svg class="icon"><use href="#i-trend"/></svg> Sales today</div>
+            <div class="fl-num">$1,284 <span class="fl-up">+18%</span></div>
+            <div class="fl-bars"><i style="height:38%"></i><i style="height:55%"></i><i style="height:42%"></i><i style="height:68%"></i><i style="height:80%"></i><i class="hot" style="height:100%"></i></div>
+          </div>
+          <div class="fl-card fl-order">
+            <div class="fl-row">
+              <span class="fl-dot"></span>
+              <div><b>New order — Linh T.</b><small>Bún Chả ×2 · pickup 6:40 pm</small></div>
+            </div>
+          </div>
+          <div class="fl-card fl-points">
+            <div class="fl-row">
+              <span class="fl-ico"><svg class="icon"><use href="#i-star"/></svg></span>
+              <div><b>+50 points</b><small>Loyalty reward earned</small></div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -359,16 +413,32 @@
             </div>
             <div class="tab-right">
               <div class="tab-phone-mock float-anim">
-                <div class="tphone">
-                  <div class="tphone-head">
-                    <span class="tphone-name">Phở Hà Nội</span>
-                    <span class="tphone-cart"><svg class="icon"><use href="#i-bag"/></svg>3</span>
+                <div class="ui-phone ui-phone-sm">
+                  <div class="ui-island"></div>
+                  <div class="ui-screen">
+                    <div class="ui-status"><span class="ui-time">9:41</span><span class="ui-sig"><i></i><i></i><i></i></span></div>
+                    <div class="ui-appbar">
+                      <span class="ui-applogo"><img src="assets/logo-symbol-yellow.png" alt=""></span>
+                      <div class="ui-apptitle"><b>Saigon Kitchen</b><small>Your branded app</small></div>
+                      <span class="ui-cart"><svg class="icon"><use href="#i-bag"/></svg><i>3</i></span>
+                    </div>
+                    <div class="ui-item">
+                      <span class="ui-thumb th-d"></span>
+                      <div class="ui-item-info"><b>Bánh Mì Đặc Biệt</b><small>House special baguette</small></div>
+                      <span class="ui-qty">2</span>
+                    </div>
+                    <div class="ui-item">
+                      <span class="ui-thumb th-b"></span>
+                      <div class="ui-item-info"><b>Cà Phê Sữa Đá</b><small>Iced milk coffee</small></div>
+                      <span class="ui-price">$5.50</span>
+                    </div>
+                    <div class="ui-upsell">
+                      <span class="ui-thumb th-c"></span>
+                      <div class="ui-item-info"><b>Pairs well: Gỏi Cuốn</b><small>Smart upsell · +$4.50</small></div>
+                      <span class="ui-qty">+</span>
+                    </div>
+                    <button class="ui-checkout"><span>Checkout · 3 items</span><b>$36.50</b></button>
                   </div>
-                  <div class="tphone-hero"></div>
-                  <div class="tphone-item"><span class="tthumb"></span><span>Phở Bò</span><b>$14.50</b></div>
-                  <div class="tphone-item selected"><span class="tthumb"></span><span>Bún Chả</span><b>$13.00</b></div>
-                  <div class="tphone-item"><span class="tthumb"></span><span>Bánh Mì</span><b>$9.00</b></div>
-                  <button class="tphone-cta">Checkout · $36.50</button>
                 </div>
                 <div class="tab-float-toast"><span class="dot"></span> Order received</div>
               </div>
@@ -392,16 +462,26 @@
               <div class="tab-notif-stack float-anim">
                 <div class="notif-card">
                   <span class="notif-ico ni-sms"><svg class="icon"><use href="#i-chat"/></svg></span>
-                  <div><b>SMS · Weekend Special</b><small>Sent to 280 customers · 22% redeemed</small></div>
+                  <div class="notif-body">
+                    <div class="notif-top"><b>Weekend Special</b><time>now</time></div>
+                    <small>SMS · 280 guests · <em>22% redeemed</em></small>
+                  </div>
                 </div>
                 <div class="notif-card">
                   <span class="notif-ico ni-mail"><svg class="icon"><use href="#i-mail"/></svg></span>
-                  <div><b>Email · We miss you 🍜</b><small>Win-back · 42% open rate</small></div>
+                  <div class="notif-body">
+                    <div class="notif-top"><b>We miss you 🍜</b><time>2h ago</time></div>
+                    <small>Win-back email · <em>42% open rate</em></small>
+                  </div>
                 </div>
                 <div class="notif-card">
                   <span class="notif-ico ni-push"><svg class="icon"><use href="#i-send"/></svg></span>
-                  <div><b>Push · Flash sale, 2 hrs left</b><small>+38 orders today</small></div>
+                  <div class="notif-body">
+                    <div class="notif-top"><b>Flash sale — 2 hrs left</b><time>5h ago</time></div>
+                    <small>Push to app users · <em>+38 orders</em></small>
+                  </div>
                 </div>
+                <div class="notif-result">All on autopilot · <b>+$2,140</b> this week</div>
               </div>
             </div>
           </div>
@@ -420,14 +500,22 @@
               <a href="#cta" class="btn-tab-cta btn-tab-light">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
             </div>
             <div class="tab-right">
-              <div class="loyalty-card float-anim">
-                <div class="lc-top">
-                  <span class="lc-brand"><img src="assets/logo-symbol-yellow.png" alt="" width="20" height="20"> Rewards</span>
-                  <span class="lc-tier">VIP</span>
+              <div class="loyalty-wrap float-anim">
+                <div class="loyalty-card">
+                  <div class="lc-top">
+                    <span class="lc-brand"><img src="assets/logo-symbol-yellow.png" alt="" width="20" height="20"> Rewards</span>
+                    <span class="lc-tier">VIP</span>
+                  </div>
+                  <div class="lc-points"><span>Points balance</span><b>820</b></div>
+                  <div class="lc-progress"><i style="width:68%"></i><span class="mk" style="left:33%"></span><span class="mk" style="left:66%"></span></div>
+                  <div class="lc-meta"><span>180 pts to free meal</span><span class="lc-star">★ Member since 2024</span></div>
                 </div>
-                <div class="lc-points"><span>Points balance</span><b>820</b></div>
-                <div class="lc-progress"><i style="width:68%"></i></div>
-                <div class="lc-meta"><span>180 pts to free meal</span><span class="lc-star">★ Member since 2024</span></div>
+                <div class="fl-card fl-lc">
+                  <div class="fl-row">
+                    <span class="fl-ico"><svg class="icon"><use href="#i-star"/></svg></span>
+                    <div><b>+50 points</b><small>Birthday bonus sent</small></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -451,6 +539,24 @@
                   <span class="bchrome-dot"></span><span class="bchrome-dot"></span><span class="bchrome-dot"></span>
                   <div class="bchrome-bar">eatfuti.ai/reports</div>
                 </div>
+                <div class="report-head">
+                  <b>Sales overview</b>
+                  <div class="report-filters"><span class="active">7D</span><span>30D</span><span>90D</span></div>
+                </div>
+                <svg class="report-chart" viewBox="0 0 364 92" fill="none" aria-hidden="true">
+                  <line x1="0" y1="24" x2="364" y2="24" stroke="rgba(20,20,19,0.06)"/>
+                  <line x1="0" y1="52" x2="364" y2="52" stroke="rgba(20,20,19,0.06)"/>
+                  <line x1="0" y1="80" x2="364" y2="80" stroke="rgba(20,20,19,0.06)"/>
+                  <path d="M0 74 C36 68, 58 56, 92 58 C126 60, 148 40, 186 38 C224 36, 246 48, 282 30 C306 18, 334 16, 364 10 L364 92 L0 92 Z" fill="url(#chartFill)"/>
+                  <path d="M0 74 C36 68, 58 56, 92 58 C126 60, 148 40, 186 38 C224 36, 246 48, 282 30 C306 18, 334 16, 364 10" stroke="#F6C507" stroke-width="2.5" stroke-linecap="round"/>
+                  <circle cx="282" cy="30" r="4" fill="#FFFDF6" stroke="#141413" stroke-width="2.5"/>
+                  <defs>
+                    <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="92" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F6C507" stop-opacity="0.22"/>
+                      <stop offset="1" stop-color="#F6C507" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
                 <div class="report-grid">
                   <div class="report-tile"><span class="rt-lab">Sales</span><span class="rt-val">$8,420</span><span class="rt-up">+12%</span></div>
                   <div class="report-tile"><span class="rt-lab">Repeat guests</span><span class="rt-val">+38</span><span class="rt-up">+9%</span></div>
@@ -480,21 +586,53 @@
 
         <!-- Left: illustration card -->
         <div class="ethnic-visual">
-          <div class="eth-phone">
-            <div class="eth-phone-header">
-              <div class="eth-restaurant-name">Phở Hà Nội</div>
-              <span class="eth-pin"><svg class="icon"><use href="#i-map-pin"/></svg></span>
+          <div class="eth-scene" role="img" aria-label="Phở Hà Nội found via local search, with authentic menu and Google reviews">
+            <div class="ui-phone ui-phone-sm">
+              <div class="ui-island"></div>
+              <div class="ui-screen">
+                <div class="ui-status"><span class="ui-time">9:41</span><span class="ui-sig"><i></i><i></i><i></i></span></div>
+                <div class="ui-appbar">
+                  <span class="ui-applogo"><img src="assets/logo-symbol-yellow.png" alt=""></span>
+                  <div class="ui-apptitle"><b>Phở Hà Nội</b><small>Vietnamese · Des Moines</small></div>
+                  <span class="ui-cart"><svg class="icon"><use href="#i-map-pin"/></svg></span>
+                </div>
+                <div class="ui-banner">
+                  <span class="ui-banner-tag">Authentic Hanoi Recipes</span>
+                  <b>Phở · Bún · Bánh Mì</b>
+                  <small>Dish names kept authentic</small>
+                </div>
+                <div class="ui-item">
+                  <span class="ui-thumb th-a"></span>
+                  <div class="ui-item-info"><b>Phở Bò</b><small>Beef noodle soup</small></div>
+                  <span class="ui-price">$14.50</span>
+                </div>
+                <div class="ui-item">
+                  <span class="ui-thumb th-d"></span>
+                  <div class="ui-item-info"><b>Bánh Mì Thịt</b><small>Pork baguette</small></div>
+                  <span class="ui-price">$9.00</span>
+                </div>
+                <div class="ui-item">
+                  <span class="ui-thumb th-c"></span>
+                  <div class="ui-item-info"><b>Gỏi Cuốn</b><small>Fresh spring rolls</small></div>
+                  <span class="ui-price">$8.50</span>
+                </div>
+                <div class="ui-dualcta">
+                  <button>Order Pickup</button>
+                  <button class="primary">Order Delivery</button>
+                </div>
+              </div>
             </div>
-            <div class="eth-hero-img"></div>
-            <div class="eth-menu-list">
-              <div class="eth-item"><span>Phở Bò</span><b>$14.50</b></div>
-              <div class="eth-item selected"><span>Bánh Mì Thịt</span><b>$9.00</b></div>
-              <div class="eth-item"><span>Bún Chả</span><b>$13.00</b></div>
-              <div class="eth-item"><span>Gỏi Cuốn</span><b>$8.50</b></div>
+
+            <div class="fl-card fl-search">
+              <svg class="icon"><use href="#i-search"/></svg>
+              <b>"phở near me"</b>
+              <em>Top result</em>
             </div>
-            <div class="eth-phone-ctas">
-              <button class="eth-cta-btn">Order Pickup</button>
-              <button class="eth-cta-btn primary">Order Delivery</button>
+            <div class="fl-card fl-greview">
+              <div class="fl-row">
+                <span class="g-badge">G</span>
+                <div><b><span class="star">★★★★★</span> 4.8</b><small>324 Google reviews</small></div>
+              </div>
             </div>
           </div>
         </div>
@@ -725,7 +863,38 @@
           </a>
         </div>
         <div class="final-cta-visual" aria-hidden="true">
-          <img src="assets/hero-image.png" alt="" loading="lazy">
+          <div class="cta-scene">
+            <div class="ui-phone ui-phone-sm">
+              <div class="ui-island"></div>
+              <div class="ui-screen">
+                <div class="ui-status"><span class="ui-time">9:41</span><span class="ui-sig"><i></i><i></i><i></i></span></div>
+                <div class="ui-appbar">
+                  <span class="ui-applogo"><img src="assets/logo-symbol-yellow.png" alt=""></span>
+                  <div class="ui-apptitle"><b>Your Dashboard</b><small>Phở Hà Nội · Today</small></div>
+                </div>
+                <div class="ui-stat">
+                  <span class="ui-stat-label">Sales today</span>
+                  <div class="ui-stat-num">$1,284 <em>+18%</em></div>
+                  <div class="fl-bars"><i style="height:34%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:66%"></i><i style="height:78%"></i><i class="hot" style="height:100%"></i></div>
+                </div>
+                <div class="ui-orders">
+                  <div class="ui-order-row"><b>Bún Chả ×2 — Linh T.</b><small>6:40 pm</small><span class="ui-order-tag new">New</span></div>
+                  <div class="ui-order-row"><b>Phở Bò — Marcus D.</b><small>6:31 pm</small><span class="ui-order-tag ok">Ready</span></div>
+                  <div class="ui-order-row"><b>Gỏi Cuốn ×3 — An P.</b><small>6:22 pm</small><span class="ui-order-tag ok">Done</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="fl-card fl-growth">
+              <div class="fl-label"><svg class="icon"><use href="#i-trend"/></svg> Avg growth</div>
+              <div class="fl-num">+38% <span class="fl-up">90 days</span></div>
+            </div>
+            <div class="fl-card fl-neworder">
+              <div class="fl-row">
+                <span class="fl-dot"></span>
+                <div><b>New order</b><small>Just now</small></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -811,20 +980,6 @@
   } else {
     document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { el.classList.add('is-visible'); });
   }
-
-  // Hero sales pulse moment (one-shot)
-  setTimeout(function () {
-    var trend = document.querySelector('.dash-tile .num .trend');
-    if (!trend) return;
-    trend.animate(
-      [
-        { transform: 'scale(1)',    background: 'var(--emerald-50)' },
-        { transform: 'scale(1.12)', background: 'var(--emerald-100)' },
-        { transform: 'scale(1)',    background: 'var(--emerald-50)' }
-      ],
-      { duration: 800, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
-    );
-  }, 2000);
 
   // ---- Feature tabs — sliding indicator + auto-advance ----
   var tabBtns    = document.querySelectorAll('.tab-btn');
