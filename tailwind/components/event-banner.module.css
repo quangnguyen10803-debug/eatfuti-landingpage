@@ -1,0 +1,81 @@
+/* ==========================================================================
+   EventBanner — CSS Module (Tailwind v4 + shadcn/ui)
+   --------------------------------------------------------------------------
+   All styling lives here via @apply. The component references these classes
+   through `styles.*` instead of inline utility strings.
+
+   Tailwind v4 NOTE: a CSS module is compiled in isolation, so it has no idea
+   about your theme/utilities unless you tell it. The `@reference` line below
+   pulls in the brand @theme + utilities from globals.css so tokens like
+   `bg-espresso-900`, `text-cream`, `bg-gold-500`, and `tracking-eyebrow`
+   resolve inside @apply. In a real app this should point at your app's
+   globals.css (e.g. `@reference "../app/globals.css";`). `@reference` only
+   makes utilities available to @apply — it does NOT duplicate any CSS.
+   ========================================================================== */
+
+@reference "../globals.css";
+
+/* --- Outer announcement bar --------------------------------------------- */
+.bar {
+  @apply relative z-[60] bg-espresso-900 text-cream;
+}
+
+/* --- Inner constrained row ---------------------------------------------- */
+.row {
+  @apply mx-auto flex max-w-[1240px] items-center gap-4 px-8 py-2.5 sm:gap-3 max-sm:px-4;
+}
+
+/* --- Gold squircle badge ------------------------------------------------ */
+.badge {
+  @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-[7px]
+         bg-gold-500 text-espresso-900 ring-4 ring-gold-500/20;
+}
+.badgeIcon {
+  @apply h-[15px] w-[15px];
+}
+
+/* --- Message ------------------------------------------------------------ */
+.message {
+  @apply m-0 min-w-0 flex-1 text-[13.5px] font-medium leading-snug text-cream/90 text-balance;
+}
+.eyebrow {
+  @apply mr-2.5 hidden align-[1px] text-[10.5px] font-extrabold uppercase
+         text-gold-500 tracking-eyebrow md:inline;
+}
+.messageText {
+  @apply font-semibold text-cream;
+}
+
+/* --- Booth chip --------------------------------------------------------- */
+.separator {
+  @apply mx-2.5 hidden opacity-35 md:inline;
+}
+.boothWrap {
+  @apply inline-flex items-center gap-1.5 whitespace-nowrap max-md:ml-2;
+}
+.boothLabel {
+  @apply text-cream/70;
+}
+.boothChip {
+  @apply rounded-full border border-gold-500/30 bg-gold-500/15 px-2.5 py-[2px]
+         font-mono text-[12.5px] font-bold tracking-[0.02em] text-gold-500;
+}
+
+/* --- Actions ------------------------------------------------------------ */
+.actions {
+  @apply inline-flex shrink-0 items-center gap-1;
+}
+.cta {
+  @apply h-8 rounded-full bg-transparent px-3 text-[12.5px] font-bold text-cream
+         border-cream/20 hover:border-cream/40 hover:bg-cream/10 hover:text-cream
+         max-sm:hidden;
+}
+.ctaIcon {
+  @apply ml-1 h-[13px] w-[13px];
+}
+.dismiss {
+  @apply h-8 w-8 rounded-full text-cream/60 hover:bg-cream/10 hover:text-cream;
+}
+.dismissIcon {
+  @apply h-[14px] w-[14px];
+}

@@ -1,0 +1,124 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Badges</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  /* Optical-spacing rule for uppercase tracked-out badges.
+     letter-spacing adds trailing space after the LAST glyph — without
+     compensation the text drifts left inside its pill. We:
+     1. Pad left by tracking, right by 0 (then add base padding).
+     2. Set line-height: 1 so vertical centering is exact. */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+    border-radius: 999px;
+    white-space: nowrap;
+    border: 1.5px solid transparent;
+  }
+  .badge.caps {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    /* base 12px sides; add the 0.1em of tracking onto the LEFT only */
+    padding: 6px calc(12px - 0.1em) 6px 12px;
+  }
+  .badge.sentence {
+    font-weight: 600;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .badge .dot {
+    width: 6px; height: 6px; border-radius: 999px;
+    flex: none;
+  }
+  /* Tone variants */
+  .badge.gold   { background: #F6C507; color: #141413; }
+  .badge.ink    { background: #141413; color: #FCF7ED; }
+  .badge.ghost  { background: transparent; color: #141413; border-color: #141413; }
+  .badge.soft   { background: #FEF6D8; color: #5C4801; }
+  .badge.muted  { background: #F1ECDF; color: #3F3D38; }
+  .badge.ai     { background: #ECFDF5; color: #047857; border: 1px solid rgba(16,185,129,0.28); }
+  .badge.ai-glow {
+    background: #10B981; color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.28);
+  }
+
+  .status {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #FCF7ED;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600; font-size: 12px;
+    line-height: 1;
+    padding: 6px 12px;
+  }
+
+  /* Optical-alignment reference rule, visible in the comparison row */
+  .ref-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  .ref { display: flex; align-items: center; gap: 12px; }
+  .ref .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; color: var(--ink-600);
+    width: 100px; flex: none;
+  }
+  .compare {
+    display: inline-flex; gap: 8px; align-items: center;
+    padding: 8px 10px;
+    background: repeating-linear-gradient(90deg, transparent 0 19px, rgba(20,20,19,0.06) 19px 20px);
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">Components · Badges &amp; tags</div>
+
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500);margin-top:-4px;">Uppercase · tracked 0.1em</div>
+  <div class="row-wrap" style="gap:8px;">
+    <span class="badge caps gold">New</span>
+    <span class="badge caps ink">Limited</span>
+    <span class="badge caps ghost">Single Origin</span>
+    <span class="badge caps ai"><span class="dot" style="background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,0.32);"></span>AI Live</span>
+    <span class="badge caps ai-glow">Intelligence</span>
+  </div>
+
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500);">Sentence case · no tracking</div>
+  <div class="row-wrap" style="gap:8px;">
+    <span class="badge sentence soft">Vegan</span>
+    <span class="badge sentence muted">Gluten free</span>
+    <span class="badge sentence" style="background:#ECFDF5;color:#047857;border:1px solid rgba(16,185,129,0.22);">Recommended by AI</span>
+  </div>
+
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500);">Status pills</div>
+  <div class="row-wrap" style="gap:10px;">
+    <span class="status" style="color:#047857;"><span style="width:6px;height:6px;border-radius:999px;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,0.28);"></span>In stock</span>
+    <span class="status" style="color:#E08A1E;"><span style="width:6px;height:6px;border-radius:999px;background:#E08A1E;box-shadow:0 0 0 3px rgba(224,138,30,0.28);"></span>Low stock</span>
+    <span class="status" style="color:#C2412B;"><span style="width:6px;height:6px;border-radius:999px;background:#C2412B;"></span>Sold out</span>
+  </div>
+
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500);">Why the padding rule matters</div>
+  <div class="ref-grid">
+    <div class="ref">
+      <span class="label">Symmetric pad</span>
+      <span class="compare">
+        <span style="background:#F6C507;color:#141413;padding:6px 12px;border-radius:999px;font-family:'Manrope';font-weight:700;font-size:11px;line-height:1;text-transform:uppercase;letter-spacing:0.1em;">Limited</span>
+      </span>
+      <span style="font-size:11px;color:var(--ink-600);">Trailing tracking pushes the glyph block left of optical centre.</span>
+    </div>
+    <div class="ref">
+      <span class="label">Compensated</span>
+      <span class="compare">
+        <span class="badge caps gold">Limited</span>
+      </span>
+      <span style="font-size:11px;color:var(--ink-600);">Right pad reduced by 0.1em (the tracking on the last glyph) — re-centres.</span>
+    </div>
+  </div>
+
+  <div style="font-size:12px;color:var(--ink-600);line-height:1.55;border-top:1px solid var(--line);padding-top:12px;">
+    <b style="color:var(--ink-900);">Rule.</b> Any uppercase tracked-out pill takes its left/right padding asymmetrically: <code style="font-family:var(--font-mono);">padding: 6px calc(12px − 0.1em) 6px 12px</code>. Use <code style="font-family:var(--font-mono);">line-height: 1</code> so vertical centring stays exact. The <code style="font-family:var(--font-mono);">.badge.caps</code> utility in this card handles both for you.
+  </div>
+</div>
+</body></html>

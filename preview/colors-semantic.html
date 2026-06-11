@@ -1,0 +1,134 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Semantic colors</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .legend {
+    display: grid;
+    grid-template-columns: 132px repeat(3, 1fr);
+    gap: 0 10px;
+    align-items: end;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-500);
+    padding-bottom: 2px;
+  }
+  .legend span:first-child { visibility: hidden; }
+
+  .ramp {
+    display: grid;
+    grid-template-columns: 132px repeat(3, 1fr);
+    gap: 10px;
+    align-items: stretch;
+  }
+  .role {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    padding-right: 4px;
+  }
+  .role .rname { font-size: 14px; font-weight: 700; color: var(--ink-900); letter-spacing: -0.01em; }
+  .role .ruse  { font-size: 11px; line-height: 1.3; color: var(--ink-500); }
+  .role .rvar  { font-family: var(--font-mono); font-size: 10px; color: var(--ink-400); }
+
+  .step {
+    border-radius: var(--r-md);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: white;
+  }
+  .step .chip {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .step .info { padding: 6px 10px 7px; }
+  .step .hex  { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-600); letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">Colors · Semantic + status</div>
+
+  <div class="legend">
+    <span>Role</span>
+    <span>Subtle &middot; surface</span>
+    <span>Base &middot; icon / text</span>
+    <span>Strong &middot; emphasis</span>
+  </div>
+
+  <div class="ramp">
+    <!-- Success -->
+    <div class="role">
+      <div class="rname">Success</div>
+      <div class="ruse">Confirmed, in stock, paid</div>
+      <div class="rvar">--success</div>
+    </div>
+    <div class="step"><div class="chip" style="background:#E7F3EC;color:#1F6B41;">Aa</div><div class="info"><div class="hex">#E7F3EC</div></div></div>
+    <div class="step"><div class="chip" style="background:#2F8F5A;color:#fff;">Aa</div><div class="info"><div class="hex">#2F8F5A</div></div></div>
+    <div class="step"><div class="chip" style="background:#1F6B41;color:#fff;">Aa</div><div class="info"><div class="hex">#1F6B41</div></div></div>
+
+    <!-- Warning -->
+    <div class="role">
+      <div class="rname">Warning</div>
+      <div class="ruse">Low stock, needs review</div>
+      <div class="rvar">--warning</div>
+    </div>
+    <div class="step"><div class="chip" style="background:#FBF0DA;color:#A8620F;">Aa</div><div class="info"><div class="hex">#FBF0DA</div></div></div>
+    <div class="step"><div class="chip" style="background:#E08A1E;color:#fff;">Aa</div><div class="info"><div class="hex">#E08A1E</div></div></div>
+    <div class="step"><div class="chip" style="background:#A8620F;color:#fff;">Aa</div><div class="info"><div class="hex">#A8620F</div></div></div>
+
+    <!-- Danger -->
+    <div class="role">
+      <div class="rname">Danger</div>
+      <div class="ruse">Errors, destructive, sold out</div>
+      <div class="rvar">--danger</div>
+    </div>
+    <div class="step"><div class="chip" style="background:#F8E5E1;color:#8F2C1B;">Aa</div><div class="info"><div class="hex">#F8E5E1</div></div></div>
+    <div class="step"><div class="chip" style="background:#C2412B;color:#fff;">Aa</div><div class="info"><div class="hex">#C2412B</div></div></div>
+    <div class="step"><div class="chip" style="background:#8F2C1B;color:#fff;">Aa</div><div class="info"><div class="hex">#8F2C1B</div></div></div>
+
+    <!-- Info -->
+    <div class="role">
+      <div class="rname">Info</div>
+      <div class="ruse">Tips, neutral notices</div>
+      <div class="rvar">--info</div>
+    </div>
+    <div class="step"><div class="chip" style="background:#E2EDF2;color:#1E4F68;">Aa</div><div class="info"><div class="hex">#E2EDF2</div></div></div>
+    <div class="step"><div class="chip" style="background:#2D6E8E;color:#fff;">Aa</div><div class="info"><div class="hex">#2D6E8E</div></div></div>
+    <div class="step"><div class="chip" style="background:#1E4F68;color:#fff;">Aa</div><div class="info"><div class="hex">#1E4F68</div></div></div>
+
+    <!-- Neutral -->
+    <div class="role">
+      <div class="rname">Neutral</div>
+      <div class="ruse">Disabled, muted, dividers</div>
+      <div class="rvar">--ink-*</div>
+    </div>
+    <div class="step"><div class="chip" style="background:#F1ECDF;color:#5A5650;">Aa</div><div class="info"><div class="hex">#F1ECDF</div></div></div>
+    <div class="step"><div class="chip" style="background:#7A766E;color:#fff;">Aa</div><div class="info"><div class="hex">#7A766E</div></div></div>
+    <div class="step"><div class="chip" style="background:#141413;color:#FCF7ED;">Aa</div><div class="info"><div class="hex">#141413</div></div></div>
+
+    <!-- Focus / Accent -->
+    <div class="role">
+      <div class="rname">Focus</div>
+      <div class="ruse">Selection, focus ring, accent</div>
+      <div class="rvar">--futi-gold</div>
+    </div>
+    <div class="step"><div class="chip" style="background:#FEF3C0;color:#7A5B05;">Aa</div><div class="info"><div class="hex">#FEF3C0</div></div></div>
+    <div class="step"><div class="chip" style="background:#F6C507;color:#141413;">Aa</div><div class="info"><div class="hex">#F6C507</div></div></div>
+    <div class="step"><div class="chip" style="background:#B8930A;color:#fff;">Aa</div><div class="info"><div class="hex">#B8930A</div></div></div>
+  </div>
+
+  <div style="font-size:12px;color:var(--ink-600);line-height:1.55;border-top:1px solid var(--line);padding-top:12px;">
+    Every status role now carries three steps: a <b style="color:var(--ink-900);">Subtle</b> tint for banner/badge surfaces, a <b style="color:var(--ink-900);">Base</b> for icons and text, and a <b style="color:var(--ink-900);">Strong</b> for hover/emphasis. Hues stay pulled toward warm, earthy tones so they sit beside Futi Gold without competing. Pair Subtle surfaces with the Strong shade for text to clear WCAG AA.
+  </div>
+</div>
+</body></html>

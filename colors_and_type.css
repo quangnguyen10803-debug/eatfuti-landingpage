@@ -1,0 +1,326 @@
+/* ==========================================================================
+   Eatfuti — Colors & Type
+   Source of truth for brand tokens. Import this in every artifact.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/* Brand font — Manrope (provided files). Static weights 200–800.
+   Self-hosted; one @font-face per uploaded weight. */
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ----- Brand colors (provided) ----------------------------------------- */
+  --espresso:        #141413;   /* Pantone Neutral Black C  · CMYK 73 67 55 81 */
+  --futi-gold:       #F6C507;   /* Pantone 116 C            · CMYK  4 21 100  0 */
+  --vanilla-cream:   #FCF7ED;   /* Pantone 11-4101 TCX      · CMYK  0  2  6  0 */
+
+  /* ----- Extended neutral scale (Tailwind-shaped 50–950) ---------------- */
+  --ink-0:   #FFFFFF;
+  --ink-50:  #FCF7ED;   /* vanilla-cream */
+  --ink-100: #F8F3E6;
+  --ink-150: #F1ECDF;   /* extra step — hairline / divider tint */
+  --ink-200: #E6E0D3;
+  --ink-300: #C5BFB4;
+  --ink-400: #9F9A91;
+  --ink-500: #7A766E;
+  --ink-600: #5A5650;
+  --ink-700: #3F3D38;
+  --ink-800: #2A2926;
+  --ink-900: #141413;   /* espresso */
+  --ink-950: #0B0B0A;
+
+  /* ----- Gold scale (50–950, anchored at 500 = futi-gold) ----------------- */
+  --gold-50:  #FFFBEB;
+  --gold-100: #FEF6D8;
+  --gold-200: #FDECAB;
+  --gold-300: #FCE077;
+  --gold-400: #FAD23A;
+  --gold-500: #F6C507;   /* futi-gold */
+  --gold-600: #D9AB04;
+  --gold-700: #B89102;
+  --gold-800: #8E6E02;
+  --gold-900: #5C4801;
+  --gold-950: #3A2D00;
+
+  /* ----- Emerald scale (50–950, anchored at 500 = #10B981) ----------------
+     Use for AI/intelligence accents, success states, fresh/healthy moments. */
+  --emerald-50:  #ECFDF5;
+  --emerald-100: #D1FAE5;
+  --emerald-200: #A7F3D0;
+  --emerald-300: #6EE7B7;
+  --emerald-400: #34D399;
+  --emerald-500: #10B981;   /* canonical */
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065F46;
+  --emerald-900: #064E3B;
+  --emerald-950: #022C22;
+  --emerald:     var(--emerald-500);
+
+  /* ----- Semantic surface / text ----------------------------------------- */
+  --bg:           var(--vanilla-cream);
+  --bg-elevated:  #FFFFFF;
+  --bg-inverse:   var(--espresso);
+  --bg-accent:    var(--futi-gold);
+
+  --fg-1:         var(--ink-900);   /* primary body text */
+  --fg-2:         var(--ink-700);   /* secondary copy */
+  --fg-3:         var(--ink-500);   /* meta / captions */
+  --fg-4:         var(--ink-400);   /* placeholder */
+  --fg-on-gold:   var(--ink-900);   /* WCAG AA on #F6C507 */
+  --fg-on-dark:   var(--ink-50);
+
+  --line:         color-mix(in oklch, var(--ink-900) 12%, transparent);
+  --line-strong:  color-mix(in oklch, var(--ink-900) 22%, transparent);
+  --line-on-dark: color-mix(in oklch, var(--ink-50)  18%, transparent);
+
+  /* ----- Status (derived to harmonize with warm palette) -----------------
+     Each role carries 3 steps: subtle (surface) / base (icon+text) / strong
+     (hover, emphasis, AA text on the subtle surface). */
+  --success-subtle: #E7F3EC;
+  --success:        var(--emerald-600);
+  --success-strong: #1F6B41;
+
+  --warning-subtle: #FBF0DA;
+  --warning:        #E08A1E;
+  --warning-strong: #A8620F;
+
+  --danger-subtle:  #F8E5E1;
+  --danger:         #C2412B;
+  --danger-strong:  #8F2C1B;
+
+  --info-subtle:    #E2EDF2;
+  --info:           #2D6E8E;
+  --info-strong:    #1E4F68;
+
+  /* Neutral + Focus rounding out the semantic set */
+  --neutral-subtle: var(--ink-150);
+  --neutral:        var(--ink-500);
+  --neutral-strong: var(--ink-900);
+
+  --focus-subtle:   #FEF3C0;
+  --focus:          var(--futi-gold);
+  --focus-strong:   #B8930A;
+
+  /* ----- Type families ---------------------------------------------------
+     Manrope is the single brand face — used for display, body, and UI.
+     The mono is reserved for tokens, code, and tabular data. */
+  --font-display: "Manrope", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "Manrope", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ----- Type scale (1.250 major-third, anchored at 16px) --------------- */
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-30: 1.875rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-60: 3.75rem;
+  --fs-72: 4.5rem;
+  --fs-96: 6rem;
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.2;
+  --lh-base:  1.5;
+  --lh-loose: 1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-snug:  -0.01em;
+  --tracking-base:  0;
+  --tracking-wide:  0.04em;
+  --tracking-caps:  0.12em;
+
+  /* ----- Spacing (4px base) --------------------------------------------- */
+  --sp-0:  0;
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* ----- Radii ----------------------------------------------------------- */
+  --r-xs:   4px;
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   18px;
+  --r-xl:   28px;
+  --r-2xl:  40px;
+  --r-pill: 999px;
+
+  /* The logo uses an exaggerated squircle. Use this for "brand-shaped" tiles. */
+  --r-brand: 22%;
+
+  /* ----- Shadows --------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px rgba(20,20,19,0.06);
+  --shadow-sm: 0 2px 6px rgba(20,20,19,0.08), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 8px 20px rgba(20,20,19,0.10), 0 2px 6px rgba(20,20,19,0.06);
+  --shadow-lg: 0 24px 48px -12px rgba(20,20,19,0.18), 0 4px 12px rgba(20,20,19,0.08);
+  --shadow-glow: 0 0 0 6px color-mix(in oklch, var(--futi-gold) 30%, transparent);
+
+  /* ----- Motion ---------------------------------------------------------- */
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:   cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:   140ms;
+  --dur-base:   220ms;
+  --dur-slow:   420ms;
+}
+
+/* ==========================================================================
+   Semantic element styles
+   ========================================================================== */
+
+html { color-scheme: light; }
+body {
+  background: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.h-display,
+h1.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(var(--fs-48), 7vw, var(--fs-96));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-60);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-36);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-24);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+}
+h4, .h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-18);
+  line-height: var(--lh-snug);
+}
+
+p, .body {
+  font-size: var(--fs-16);
+  line-height: var(--lh-base);
+  color: var(--fg-1);
+  text-wrap: pretty;
+}
+.lede {
+  font-size: var(--fs-20);
+  line-height: var(--lh-base);
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+.meta, small {
+  font-size: var(--fs-14);
+  line-height: var(--lh-snug);
+  color: var(--fg-3);
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-12);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--fg-2);
+}
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: color-mix(in oklch, var(--futi-gold) 18%, var(--vanilla-cream));
+  color: var(--ink-900);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+}
+
+a {
+  color: var(--ink-900);
+  text-decoration-color: var(--futi-gold);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-thickness var(--dur-fast) var(--ease-out);
+}
+a:hover { text-decoration-thickness: 0.28em; }
+
+::selection { background: var(--futi-gold); color: var(--ink-900); }

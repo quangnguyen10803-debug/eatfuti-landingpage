@@ -1,0 +1,73 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Buttons</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700; font-size: 14px;
+    line-height: 1;
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    letter-spacing: -0.005em;
+    transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+                filter 140ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary { background:#141413; color:#FCF7ED; }
+  .btn-primary:hover { filter: brightness(1.12); }
+  .btn-gold    { background:#F6C507; color:#141413; }
+  .btn-gold:hover { filter: brightness(0.96); }
+  .btn-ghost   { background:transparent; color:#141413; border-color:#141413; padding: 10.5px 18.5px; }
+  .btn-ghost:hover { background: rgba(20,20,19,0.06); }
+  .btn-text {
+    background: transparent; color: #141413; border: none;
+    padding: 12px 6px;
+    text-decoration: underline; text-decoration-color: #F6C507;
+    text-decoration-thickness: 3px; text-underline-offset: 4px;
+  }
+  .btn-text:hover { text-decoration-thickness: 5px; }
+
+  /* Focus — gold halo, replaces the browser ring */
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 6px color-mix(in oklch, #F6C507 30%, transparent);
+  }
+
+  /* Sizes */
+  .btn-sm { padding: 8px 14px; font-size: 12px; }
+  .btn-lg { padding: 14px 24px; font-size: 16px; }
+  .btn-icon { width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .btn[disabled] { background:#E6E0D3; color:#9F9A91; cursor: not-allowed; border-color: transparent; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">Components · Buttons</div>
+
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500);margin-top:-4px;">Foundation</div>
+  <div class="row-wrap" style="gap:10px;">
+    <button class="btn btn-primary">Order now</button>
+    <button class="btn btn-gold">Find a stockist</button>
+    <button class="btn btn-ghost">Learn more</button>
+    <button class="btn btn-text">Read the story →</button>
+  </div>
+
+  <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500);">Sizes &amp; states</div>
+  <div class="row-wrap" style="gap:10px;align-items:center;">
+    <button class="btn btn-primary btn-sm">Small</button>
+    <button class="btn btn-primary">Default</button>
+    <button class="btn btn-primary btn-lg">Large</button>
+    <button class="btn btn-primary btn-icon">→</button>
+    <button class="btn" disabled>Sold out</button>
+  </div>
+
+  <div style="font-size:12px;color:var(--ink-600);line-height:1.55;border-top:1px solid var(--line);padding-top:12px;">
+    <b style="color:var(--ink-900);">Hierarchy.</b> Espresso (primary) for the main action, Gold for a single loud transactional moment, Ghost for secondary, and the gold-underline text button for editorial links. One primary per view.<br/>
+    <b style="color:var(--ink-900);">Interaction.</b> Pills throughout. Press scales to 0.97; hover darkens or brightens the fill ~6–12%; focus shows the 6px Futi Gold halo. No colour change on press.
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Form fields — CSS Module (Tailwind v4 + shadcn/ui)
+   --------------------------------------------------------------------------
+   Styling for the branded form-control wrappers in `form-fields.tsx`
+   (TextField, CheckboxField, RadioGroupField, SwitchField, DateField).
+   Every control is a shadcn primitive; ALL styling lives here via @apply and
+   is attached with cn() so it overrides the primitive's defaults.
+
+   `@reference` pulls the brand @theme + utilities from globals.css so tokens
+   like `border-espresso-200`, `bg-gold-500`, `shadow-glow` resolve inside
+   @apply. It injects no CSS. Repoint at your app globals in a real project
+   (e.g. `@reference "../app/globals.css";`).
+
+   Three sizes throughout: sm / md (default) / lg. Geometry scales; the brand
+   look (1.5px hairline border, espresso-on-checked, gold focus halo, pill /
+   12px radii) stays constant.
+   ========================================================================== */
+
+@reference "../globals.css";
+
+/* --- Field shell (label + control + hint/error) ------------------------- */
+.field   { @apply flex min-w-0 flex-col gap-1.5; }
+.label   { @apply font-semibold text-espresso-700; }
+.labelSm { @apply text-[11px]; }
+.labelMd { @apply text-xs; }
+.labelLg { @apply text-[13px]; }
+.hint    { @apply text-[11px] leading-snug text-espresso-400; }
+.error   { @apply text-[11px] leading-snug font-medium text-danger; }
+.required { @apply text-gold-700; }
+
+/* ==========================================================================
+   Text input
+   ========================================================================== */
+.input {
+  @apply w-full bg-white text-espresso-900 border-[1.5px] border-espresso-200
+         outline-none transition-[border-color,box-shadow] duration-200
+         placeholder:text-espresso-400
+         focus-visible:border-espresso-900 focus-visible:shadow-glow
+         disabled:cursor-not-allowed disabled:bg-espresso-100 disabled:text-espresso-400;
+}
+.inputSm { @apply h-8 rounded-[10px] px-3 text-xs; }
+.inputMd { @apply h-10 rounded-xl px-3.5 text-sm; }
+.inputLg { @apply h-12 rounded-[14px] px-4 text-base; }
+
+/* error state — pairs with .input */
+.invalid {
+  @apply border-danger focus-visible:border-danger
+         focus-visible:shadow-[0_0_0_6px_rgb(194_65_43_/_0.22)];
+}
+
+/* ==========================================================================
+   Checkbox  (shadcn <Checkbox> — a Radix button with a data-state)
+   ========================================================================== */
+.checkRow   { @apply inline-flex items-start gap-2.5; }
+.checkRowLg { @apply gap-3; }
+.check {
+  @apply inline-flex shrink-0 items-center justify-center bg-white
+         border-[1.5px] border-espresso-300 text-cream transition-colors duration-150
+         focus-visible:outline-none focus-visible:border-espresso-900 focus-visible:shadow-glow
+         data-[state=checked]:bg-espresso-900 data-[state=checked]:border-espresso-900
+         data-[state=indeterminate]:bg-espresso-900 data-[state=indeterminate]:border-espresso-900
+         disabled:cursor-not-allowed disabled:border-espresso-200 disabled:bg-espresso-100;
+}
+.checkSm   { @apply size-4 rounded-[5px]; }
+.checkMd   { @apply size-[18px] rounded-md; }
+.checkLg   { @apply size-[22px] rounded-[7px]; }
+.checkIconSm { @apply size-3; }
+.checkIconMd { @apply size-3.5; }
+.checkIconLg { @apply size-4; }
+
+/* label that sits beside a checkbox/radio/switch (not stacked) */
+.inlineLabel   { @apply select-none font-medium text-espresso-800; }
+.inlineLabelSm { @apply text-xs leading-4; }
+.inlineLabelMd { @apply text-sm leading-[18px]; }
+.inlineLabelLg { @apply text-[15px] leading-[22px]; }
+
+/* ==========================================================================
+   Radio group  (shadcn <RadioGroup> / <RadioGroupItem>)
+   ========================================================================== */
+.radioGroup { @apply flex flex-col gap-2.5; }
+.radio {
+  @apply inline-flex shrink-0 items-center justify-center rounded-full bg-white
+         border-[1.5px] border-espresso-300 transition-colors duration-150
+         focus-visible:outline-none focus-visible:border-espresso-900 focus-visible:shadow-glow
+         data-[state=checked]:border-espresso-900
+         disabled:cursor-not-allowed disabled:border-espresso-200 disabled:bg-espresso-100;
+}
+.radioSm { @apply size-4; }
+.radioMd { @apply size-[18px]; }
+.radioLg { @apply size-[22px]; }
+/* the filled centre dot */
+.radioDot   { @apply rounded-full bg-espresso-900; }
+.radioDotSm { @apply size-1.5; }
+.radioDotMd { @apply size-2; }
+.radioDotLg { @apply size-2.5; }
+
+/* ==========================================================================
+   Switch  (shadcn <Switch>)
+   ========================================================================== */
+.switch {
+  @apply relative inline-flex shrink-0 items-center rounded-full
+         border-2 border-transparent bg-espresso-200 transition-colors duration-200
+         focus-visible:outline-none focus-visible:shadow-glow
+         data-[state=checked]:bg-espresso-900
+         disabled:cursor-not-allowed disabled:opacity-50;
+}
+.switchSm { @apply h-[18px] w-8; }
+.switchMd { @apply h-[22px] w-10; }
+.switchLg { @apply h-7 w-12; }
+/* thumb */
+.thumb {
+  @apply pointer-events-none block rounded-full bg-white shadow-sm
+         ring-0 transition-transform duration-200
+         data-[state=unchecked]:translate-x-0;
+}
+.thumbSm { @apply size-3.5 data-[state=checked]:translate-x-[14px]; }
+.thumbMd { @apply size-[18px] data-[state=checked]:translate-x-[18px]; }
+.thumbLg { @apply size-6 data-[state=checked]:translate-x-5; }
+
+/* ==========================================================================
+   Date picker  (shadcn <Popover> trigger styled like the input + <Calendar>)
+   ========================================================================== */
+.dateTrigger {
+  @apply inline-flex w-full items-center gap-2 bg-white text-left text-espresso-900
+         border-[1.5px] border-espresso-200 font-medium outline-none
+         transition-[border-color,box-shadow] duration-200
+         hover:border-espresso-300
+         focus-visible:border-espresso-900 focus-visible:shadow-glow
+         data-[state=open]:border-espresso-900 data-[state=open]:shadow-glow;
+}
+.dateTriggerSm { @apply h-8 rounded-[10px] px-3 text-xs; }
+.dateTriggerMd { @apply h-10 rounded-xl px-3.5 text-sm; }
+.dateTriggerLg { @apply h-12 rounded-[14px] px-4 text-base; }
+.dateIcon       { @apply ml-auto shrink-0 text-espresso-400; }
+.datePlaceholder { @apply text-espresso-400; }
+
+.calendarPop {
+  @apply w-auto rounded-2xl border border-espresso-150 bg-white p-3 shadow-lg;
+}
+/* react-day-picker slot overrides, passed via <Calendar classNames> */
+.calCaption  { @apply flex items-center justify-between px-1 pb-2 text-sm font-semibold text-espresso-900; }
+.calNavBtn   { @apply inline-flex size-7 items-center justify-center rounded-lg text-espresso-600 hover:bg-espresso-100; }
+.calHead     { @apply text-[11px] font-semibold uppercase tracking-eyebrow text-espresso-400; }
+.calDay      { @apply inline-flex size-9 items-center justify-center rounded-lg text-sm text-espresso-800 transition-colors hover:bg-gold-100; }
+.calToday    { @apply ring-1 ring-inset ring-gold-500; }
+.calSelected { @apply bg-espresso-900 text-cream hover:bg-espresso-800; }
+.calOutside  { @apply text-espresso-300; }
+.calDisabled { @apply text-espresso-200; }

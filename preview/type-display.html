@@ -1,0 +1,148 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Display type</title>
+<link rel="stylesheet" href="_card.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  .intro {
+    max-width: 62ch;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-600);
+  }
+  .intro strong { color: var(--ink-900); font-weight: 700; }
+
+  .pairs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: white;
+  }
+  .pair {
+    padding: 26px 28px 24px;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+  /* kill the outer-most top/left borders so only internal grid lines show */
+  .pair:nth-child(1), .pair:nth-child(2) { border-top: 0; }
+
+  .pair-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pair-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-900);
+    letter-spacing: -0.01em;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 7px;
+    border-radius: 999px;
+  }
+  .tag.serif { background: var(--futi-gold); color: var(--espresso); }
+  .tag.sans  { background: var(--espresso); color: var(--vanilla-cream); }
+  .tag.pick  {
+    background: transparent;
+    color: var(--ink-700);
+    border: 1px solid var(--line);
+  }
+
+  .specimen { line-height: 0.96; color: var(--ink-900); margin: 2px 0; }
+  .support {
+    font-family: "Manrope", sans-serif;
+    color: var(--ink-700);
+    line-height: 1.45;
+  }
+  .support .lead { font-weight: 600; color: var(--ink-900); }
+  .note {
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--ink-500);
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  /* per-face display settings */
+  .f-instrument { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 50px; letter-spacing: 0; }
+  .f-newsreader { font-family: "Newsreader", serif; font-weight: 500; font-size: 46px; letter-spacing: -0.01em; }
+  .f-dmserif    { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 46px; letter-spacing: -0.005em; }
+  .f-space      { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 44px; letter-spacing: -0.03em; }
+  .f-instrument em, .f-dmserif em { font-style: italic; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">Type · Display pairings with Manrope</div>
+  <p class="intro"><strong>Manrope is the single brand face — it carries display, body, and UI.</strong> Headlines use Manrope at heavy weights (800 / 700). The faces below are kept on file as optional display alternates if a distinct headline voice is ever wanted; each is shown over a Manrope sub-line.</p>
+
+  <div class="pairs">
+
+    <div class="pair">
+      <div class="pair-head">
+        <span class="pair-name">Instrument Serif</span>
+        <span class="tag serif">Serif</span>
+        <span class="tag pick">Editorial alt</span>
+      </div>
+      <div class="specimen f-instrument">A taste,<br><em>not a trend.</em></div>
+      <div class="support"><span class="lead">Made by hand. Eaten by the spoonful.</span><br>Set in Manrope 600 over 400.</div>
+      <div class="note">High contrast, airy, a little literary. Reads like a food magazine masthead. Best very large, with the italic doing the talking.</div>
+    </div>
+
+    <div class="pair">
+      <div class="pair-head">
+        <span class="pair-name">Newsreader</span>
+        <span class="tag serif">Serif</span>
+      </div>
+      <div class="specimen f-newsreader">A taste,<br>not a trend.</div>
+      <div class="support"><span class="lead">Made by hand. Eaten by the spoonful.</span><br>Set in Manrope 600 over 400.</div>
+      <div class="note">Warm, readable text-serif with optical sizing. The most approachable of the serifs. Good when headlines run long.</div>
+    </div>
+
+    <div class="pair">
+      <div class="pair-head">
+        <span class="pair-name">DM Serif Display</span>
+        <span class="tag serif">Serif</span>
+      </div>
+      <div class="specimen f-dmserif">A taste,<br>not a trend.</div>
+      <div class="support"><span class="lead">Made by hand. Eaten by the spoonful.</span><br>Set in Manrope 600 over 400.</div>
+      <div class="note">Classic, high-contrast Didone. Feels heritage and confident. The most formal option, leans premium-grocer.</div>
+    </div>
+
+    <div class="pair">
+      <div class="pair-head">
+        <span class="pair-name">Space Grotesk</span>
+        <span class="tag sans">Sans</span>
+      </div>
+      <div class="specimen f-space">A taste,<br>not a trend.</div>
+      <div class="support"><span class="lead">Made by hand. Eaten by the spoonful.</span><br>Set in Manrope 600 over 400.</div>
+      <div class="note">Geometric, technical edge with tight tracking. Pushes the brand modern and DTC. Coolest, least hand-crafted of the set.</div>
+    </div>
+
+  </div>
+
+  <div style="display:flex;gap:20px;font-family:var(--font-mono);font-size:11px;color:var(--ink-600);flex-wrap:wrap;">
+    <span>Body / UI · Manrope (locked)</span>
+    <span>Display · Manrope (locked)</span>
+    <span>Serif = warm editorial · Sans = modern confident</span>
+    <span>tracking −0.005 to −0.03em</span>
+  </div>
+</div>
+</body></html>

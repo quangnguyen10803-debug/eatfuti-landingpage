@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Design reference files (not part of the website)
+ChatGPT Image*.png
+
+# Dev screenshots
+screenshots/

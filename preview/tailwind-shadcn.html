@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Tailwind + shadcn</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .grp-label {
+    font-family: var(--font-mono);
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-500);
+    margin: 2px 0 -2px;
+  }
+  .tok-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .tok {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .tok .sw { width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; }
+  /* split swatch for status roles: subtle | base | strong */
+  .tok .sw3 {
+    width: 34px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    display: flex; overflow: hidden; border: 1px solid var(--line);
+  }
+  .tok .sw3 i { flex: 1; }
+  .tok .name { color: #141413; white-space: nowrap; }
+  .tok .role { color: #7A766E; margin-left: auto; white-space: nowrap; padding-left: 8px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">Tailwind + shadcn/ui · semantic token map</div>
+
+  <div class="grp-label">shadcn core tokens — globals.css</div>
+  <div class="tok-grid">
+    <div class="tok"><div class="sw" style="background:#141413;"></div><span class="name">--primary</span><span class="role">espresso</span></div>
+    <div class="tok"><div class="sw" style="background:#F6C507;"></div><span class="name">--secondary</span><span class="role">futi gold</span></div>
+    <div class="tok"><div class="sw" style="background:#10B981;"></div><span class="name">--accent</span><span class="role">emerald</span></div>
+    <div class="tok"><div class="sw" style="background:#FCF7ED;border:1px solid var(--line);"></div><span class="name">--background</span><span class="role">cream</span></div>
+    <div class="tok"><div class="sw" style="background:#C2412B;"></div><span class="name">--destructive</span><span class="role">danger</span></div>
+    <div class="tok"><div class="sw" style="background:#F6C507;box-shadow:0 0 0 4px rgba(246,197,7,0.30);"></div><span class="name">--ring</span><span class="role">gold halo</span></div>
+  </div>
+
+  <div class="grp-label">brand status utilities — bg-* / text-* / border-*</div>
+  <div class="tok-grid">
+    <div class="tok"><div class="sw3"><i style="background:#E7F3EC;"></i><i style="background:#2F8F5A;"></i><i style="background:#1F6B41;"></i></div><span class="name">--color-success</span><span class="role">+ subtle / strong</span></div>
+    <div class="tok"><div class="sw3"><i style="background:#FBF0DA;"></i><i style="background:#E08A1E;"></i><i style="background:#A8620F;"></i></div><span class="name">--color-warning</span><span class="role">+ subtle / strong</span></div>
+    <div class="tok"><div class="sw3"><i style="background:#F8E5E1;"></i><i style="background:#C2412B;"></i><i style="background:#8F2C1B;"></i></div><span class="name">--color-danger</span><span class="role">+ subtle / strong</span></div>
+    <div class="tok"><div class="sw3"><i style="background:#E2EDF2;"></i><i style="background:#2D6E8E;"></i><i style="background:#1E4F68;"></i></div><span class="name">--color-info</span><span class="role">+ subtle / strong</span></div>
+  </div>
+
+  <div style="font-size:12px;color:var(--ink-600);line-height:1.55;border-top:1px solid var(--line);padding-top:12px;">
+    The <code style="font-family:var(--font-mono);">@theme</code> block in <code style="font-family:var(--font-mono);">tailwind/globals.css</code> registers status colours as utilities — <code style="font-family:var(--font-mono);">bg-success-subtle</code>, <code style="font-family:var(--font-mono);">text-danger-strong</code>, <code style="font-family:var(--font-mono);">border-info</code>, etc. shadcn maps <code style="font-family:var(--font-mono);">--destructive</code> to danger; the other three status roles live alongside it. Drop <code style="font-family:var(--font-mono);">globals.css</code> into a shadcn project — no <code style="font-family:var(--font-mono);">tailwind.config.js</code> needed in v4. See <code style="font-family:var(--font-mono);">tailwind/README.md</code>.
+  </div>
+</div>
+</body></html>
