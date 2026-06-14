@@ -56,10 +56,10 @@
       <span class="brand-name">EatFuti</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="/" aria-current="page">Home</a>
-      <a href="how-it-works.html">How it works</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="contact.html">Contact</a>
+      <a href="/">Home</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="header-cta">
       <a href="/login" class="btn btn-ghost">Sign in</a>
@@ -82,9 +82,9 @@
     </button>
   </div>
   <a href="/">Home</a>
-  <a href="how-it-works.html">How it works</a>
-  <a href="pricing.html">Pricing</a>
-  <a href="contact.html">Contact</a>
+  <a href="#how-it-works">How it works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#contact">Contact</a>
   <div class="mobile-nav-cta">
     <a href="/login" class="btn btn-ghost">Sign in</a>
     <a href="#cta" class="btn btn-gold">Get started</a>
@@ -139,11 +139,7 @@
 
       <!-- Product preview — dashboard hero image -->
       <div class="hero-mock reveal">
-        <img src="assets/hero-image-new.png" alt="EatFuti restaurant dashboard showing live sales, orders, and analytics" class="hero-image">
-        <div class="hero-badges">
-          <img src="assets/today's%20report.svg" alt="" class="hero-badge hero-badge-top" aria-hidden="true">
-          <img src="assets/campaign%20launch.svg" alt="" class="hero-badge hero-badge-bottom" aria-hidden="true">
-        </div>
+        <img src="assets/hero-image.png" alt="EatFuti restaurant dashboard showing live sales, orders, and analytics" class="hero-image">
       </div>
 
     </div>
@@ -595,7 +591,7 @@
             </div>
             <div class="tab-right">
               <div class="tab-report-img">
-                <img id="smart-report-svg" src="assets/smart%20report.svg" alt="EatFuti smart report dashboard">
+                <img src="assets/smart%20report.png" alt="EatFuti smart report dashboard">
               </div>
             </div>
           </div>
@@ -865,16 +861,16 @@
       <div class="footer-col">
         <h5>Product</h5>
         <ul>
-          <li><a href="how-it-works.html">How it works</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
         <ul>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="contact.html">Talk to our team</a></li>
-          <li><a href="pricing.html">Get started</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Talk to our team</a></li>
+          <li><a href="#cta">Get started</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -969,13 +965,6 @@
     if (target) target.classList.add('active');
     positionIndicator(btn, false);
     restartProgress();
-    if (btn.dataset.tab === 'dashboard') {
-      var svgImg = document.getElementById('smart-report-svg');
-      if (svgImg) {
-        var base = svgImg.src.split('?')[0];
-        svgImg.src = base + '?t=' + Date.now();
-      }
-    }
   }
 
   function scheduleNext() {

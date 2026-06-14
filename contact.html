@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FCF7ED">
+  <title>Contact — EatFuti</title>
+  <meta name="description" content="Talk to a real expert who speaks your language. Tell us about your restaurant and we'll reach out today — no pressure, no setup fees.">
+  <link rel="icon" href="assets/logo-symbol-yellow.png" type="image/png">
+  <link rel="stylesheet" href="landing.css">
+  <style>
+    /* ── Contact hero (2-col: form + sidebar) ──────────────── */
+    .contact-hero {
+      padding-block: clamp(56px, 8vw, 96px);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Form side */
+    .contact-form-side {}
+    .contact-eyebrow { margin-bottom: 16px; display: block; }
+    .contact-h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.06;
+      margin: 0 0 16px;
+    }
+    .contact-h1 em { font-style: normal; color: var(--gold-600); }
+    .contact-lede {
+      color: var(--fg-2);
+      font-size: 17px;
+      line-height: 1.6;
+      margin: 0 0 32px;
+      max-width: 480px;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-800);
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--ink-900);
+      background: #fff;
+      border: 1.5px solid rgba(20,20,19,0.14);
+      border-radius: 12px;
+      padding: 12px 16px;
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(246,197,7,0.2);
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--fg-4); }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%239F9A91' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+    .form-textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+    .form-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: var(--ink-900);
+      color: #FCF7ED;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.15s, box-shadow 0.2s;
+      margin-top: 6px;
+    }
+    .form-submit-btn:hover { background: var(--ink-800); box-shadow: 0 6px 20px rgba(20,20,19,0.2); }
+    .form-submit-btn .icon { width: 17px; height: 17px; }
+    .form-note {
+      font-size: 12px;
+      color: var(--fg-3);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Info side */
+    .contact-info-side {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-info-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .cic-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--fg-3);
+      margin: 0 0 14px;
+    }
+    .cic-items { display: flex; flex-direction: column; gap: 12px; }
+    .cic-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .cic-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cic-icon .icon { width: 15px; height: 15px; color: var(--ink-900); }
+    .cic-text strong { font-size: 14px; font-weight: 700; display: block; color: var(--ink-900); }
+    .cic-text span { font-size: 13px; color: var(--fg-2); }
+
+    /* Language card */
+    .lang-card {
+      background: var(--ink-900);
+      border-radius: 20px;
+      padding: 24px 22px;
+      color: #fff;
+    }
+    .lang-card h4 { margin: 0 0 8px; color: #fff; font-size: 16px; }
+    .lang-card p { margin: 0; font-size: 13px; color: rgba(252,247,237,0.65); line-height: 1.55; }
+    .lang-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .lang-pill {
+      padding: 4px 10px;
+      background: rgba(246,197,7,0.15);
+      border: 1px solid rgba(246,197,7,0.3);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ── What happens next ──────────────────────────────────── */
+    .next-section { background: #fff; }
+    .next-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .next-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      background: none;
+      padding: 0;
+    }
+    .next-num {
+      width: 56px; height: 56px;
+      border-radius: 999px;
+      background: rgba(246, 197, 7, 0.15);
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--gold-600);
+      flex-shrink: 0;
+    }
+    .next-step h4 { margin: 0; font-size: 16px; font-weight: 800; }
+    .next-step p { margin: 0; font-size: 14px; color: var(--fg-2); line-height: 1.55; }
+
+    /* ── Why EatFuti cards ──────────────────────────────────── */
+    .why-section { background: var(--bg); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .why-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .why-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-icon .icon { width: 19px; height: 19px; color: var(--ink-900); }
+    .why-card h4 { margin: 0; font-size: 16px; font-weight: 800; }
+    .why-card p { margin: 0; font-size: 14px; color: var(--fg-2); line-height: 1.55; }
+
+    /* ── Bottom CTA ─────────────────────────────────────────── */
+    .contact-cta-section { background: #ffffff; padding: 0; }
+    .contact-cta-card {
+      background: #141413;
+      padding: clamp(64px, 8vw, 96px) clamp(24px, 5vw, 64px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .contact-cta-card::before {
+      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 360px;
+      background: radial-gradient(ellipse, rgba(246,197,7,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-cta-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 720px; }
+    .contact-cta-card h2 { color: #fff; margin: 0 0 16px; font-size: clamp(30px, 4vw, 48px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
+    .contact-cta-card p { color: rgba(255,255,255,0.6); margin: 0 0 32px; max-width: 440px; font-size: 16px; }
+    .cta-btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-info-side { display: grid; grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .next-steps,
+      .why-grid { grid-template-columns: 1fr; }
+      .contact-info-side { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Shared SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-plus"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-check"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-spark"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+    <symbol id="i-phone"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-mail"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-map-pin"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3v4z"/><path d="M3 19a2 2 0 0 0 2 2h1v-6H3v4z"/></symbol>
+    <symbol id="i-globe"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
+    <symbol id="i-trend"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+    <symbol id="i-percent"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="i-rocket"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+  </defs>
+</svg>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="EatFuti home">
+      <img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28">
+      <span class="brand-name">EatFuti</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-ghost">Sign in</a>
+      <a href="contact.html" class="btn btn-nav-cta">
+        Get a Free Demo <svg class="icon"><use href="#i-arrow"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="index.html" class="brand"><img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28"><span class="brand-name">EatFuti</span></a>
+    <button class="hamburger" id="closeMobile" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="contact.html">Contact</a>
+  <div class="mobile-nav-cta">
+    <a href="contact.html" class="btn btn-ghost">Sign in</a>
+    <a href="contact.html" class="btn btn-gold">Get started</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── Hero + Form ───────────────────────────────────────── -->
+  <section class="contact-hero">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Form -->
+        <div class="contact-form-side reveal">
+          <span class="eyebrow contact-eyebrow">Talk to a real person</span>
+          <h1 class="contact-h1">Let's grow your restaurant<br><em>together.</em></h1>
+          <p class="contact-lede">Tell us about your restaurant — a real expert who speaks your language will reach out today.</p>
+
+          <form class="contact-form" action="#" method="post" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cf-name">Your name</label>
+                <input class="form-input" id="cf-name" name="name" type="text" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-restaurant">Restaurant name</label>
+                <input class="form-input" id="cf-restaurant" name="restaurant" type="text" placeholder="Restaurant name" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cf-phone">Phone</label>
+                <input class="form-input" id="cf-phone" name="phone" type="tel" placeholder="(555) 000-0000">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-cuisine">Cuisine</label>
+                <select class="form-select" id="cf-cuisine" name="cuisine">
+                  <option value="">Select your cuisine</option>
+                  <option>Vietnamese</option>
+                  <option>Chinese</option>
+                  <option>Thai</option>
+                  <option>Korean</option>
+                  <option>Mexican</option>
+                  <option>Indian</option>
+                  <option>Japanese</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cf-email">Email</label>
+              <input class="form-input" id="cf-email" name="email" type="email" placeholder="hello@yourrestaurant.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cf-message">What do you need help with?</label>
+              <textarea class="form-textarea" id="cf-message" name="message" placeholder="Tell us about your restaurant and what you'd like to grow…"></textarea>
+            </div>
+            <button class="form-submit-btn" type="submit">
+              Get my free restaurant scan <svg class="icon"><use href="#i-arrow"/></svg>
+            </button>
+            <p class="form-note">No pressure · we set it all up for you</p>
+          </form>
+        </div>
+
+        <!-- Info sidebar -->
+        <div class="contact-info-side reveal">
+
+          <div class="contact-info-card">
+            <p class="cic-title">Reach us directly</p>
+            <div class="cic-items">
+              <div class="cic-item">
+                <div class="cic-icon"><svg class="icon"><use href="#i-phone"/></svg></div>
+                <div class="cic-text">
+                  <strong>Call our local team</strong>
+                  <span>(515) 493-0243</span>
+                </div>
+              </div>
+              <div class="cic-item">
+                <div class="cic-icon"><svg class="icon"><use href="#i-mail"/></svg></div>
+                <div class="cic-text">
+                  <strong>Email</strong>
+                  <span>hello@eatfuti.ai</span>
+                </div>
+              </div>
+              <div class="cic-item">
+                <div class="cic-icon"><svg class="icon"><use href="#i-map-pin"/></svg></div>
+                <div class="cic-text">
+                  <strong>Visit</strong>
+                  <span>700 Locust St Ste 304,<br>Des Moines, IA 50309</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lang-card">
+            <h4>We speak your language</h4>
+            <p>Get support from a real expert who understands your restaurant — in your own language.</p>
+            <div class="lang-pills">
+              <span class="lang-pill">Tiếng Việt</span>
+              <span class="lang-pill">English</span>
+              <span class="lang-pill">中文</span>
+              <span class="lang-pill">한국어</span>
+              <span class="lang-pill">Español</span>
+              <span class="lang-pill">and more</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What happens next ─────────────────────────────────── -->
+  <section class="next-section">
+    <div class="container">
+      <div class="section-head section-head-center reveal">
+        <span class="eyebrow">What happens next</span>
+        <h2>Simple, friendly, no pressure.</h2>
+      </div>
+      <div class="next-steps reveal">
+        <div class="next-step">
+          <div class="next-num">1</div>
+          <h4>We call you today</h4>
+          <p>A real expert who speaks your language learns about your restaurant and what you want to grow.</p>
+        </div>
+        <div class="next-step">
+          <div class="next-num">2</div>
+          <h4>We build it for you</h4>
+          <p>Website, app, menu, Google and photos — all set up for you. You don't touch a single setting.</p>
+        </div>
+        <div class="next-step">
+          <div class="next-num">3</div>
+          <h4>You go live &amp; grow</h4>
+          <p>Start taking commission-free orders and bringing customers back — every single day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why EatFuti ───────────────────────────────────────── -->
+  <section class="why-section">
+    <div class="container">
+      <div class="section-head section-head-center reveal">
+        <span class="eyebrow">Why restaurants choose EatFuti</span>
+        <h2>Built for restaurants like yours</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-card">
+          <div class="why-icon"><svg class="icon"><use href="#i-percent"/></svg></div>
+          <h4>Keep your profit</h4>
+          <p>One flat fee, 0% commission on Pro, and we cover your card fees — so you keep everything you earn.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg class="icon"><use href="#i-globe"/></svg></div>
+          <h4>Built for your cuisine</h4>
+          <p>We keep your dish names authentic, post in your style, and support you in your own language.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg class="icon"><use href="#i-spark"/></svg></div>
+          <h4>We do the work</h4>
+          <p>Setup, daily social media, marketing, and Google — all done for you. You just cook.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section class="contact-cta-section">
+    <div class="contact-cta-card reveal">
+      <div class="contact-cta-copy">
+        <h2>Free scan. Talk to a real person today.</h2>
+        <p>Get your free restaurant scan and see exactly how we can help you grow.</p>
+        <div class="cta-btn-row">
+          <a href="pricing.html" class="btn-prestige btn-prestige-inv">
+            <span class="btn-prestige-label">See plans &amp; get started</span>
+            <span class="btn-prestige-icon"><svg class="icon"><use href="#i-arrow"/></svg></span>
+          </a>
+          <a href="tel:5154930243" class="btn btn-ghost">
+            Call (515) 493-0243
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28">
+          <span class="brand-name">EatFuti</span>
+        </a>
+        <p>The growth platform for ethnic &amp; local restaurants. Get found, sell more, keep your profit.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Talk to our team</a></li>
+          <li><a href="pricing.html">Get started</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in touch</h5>
+        <ul class="footer-contact">
+          <li>(515) 493-0243</li>
+          <li>hello@eatfuti.ai</li>
+          <li>Des Moines, IA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EatFuti Inc. · Built for ethnic &amp; local restaurants · One flat platform. Zero commission on Pro. We cover your credit card fees.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var header = document.getElementById('siteHeader');
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var hamburger = document.getElementById('hamburger');
+  var closeBtn  = document.getElementById('closeMobile');
+  var drawer    = document.getElementById('mobileNav');
+  function openNav()  { drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeNav() { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  hamburger.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FCF7ED">
+  <title>Pricing — EatFuti</title>
+  <meta name="description" content="Simple, transparent pricing for ethnic and local restaurants. One flat fee, 0% commission on Pro, and we cover your credit card fees.">
+  <link rel="icon" href="assets/logo-symbol-yellow.png" type="image/png">
+  <link rel="stylesheet" href="landing.css">
+  <style>
+    /* ── Page hero ─────────────────────────────────────────── */
+    .page-hero {
+      padding-block: clamp(72px, 10vw, 120px) clamp(48px, 6vw, 72px);
+      text-align: center;
+    }
+    .page-hero .eyebrow { margin-bottom: 16px; display: block; }
+    .page-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 0 0 20px;
+    }
+    .page-hero .lede { max-width: 580px; margin-inline: auto; margin-bottom: 36px; }
+
+    /* Trust chips row */
+    .trust-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .trust-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      background: #fff;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-800);
+      box-shadow: var(--shadow-xs);
+      border: 1.5px solid var(--line);
+    }
+    .trust-chip .icon { width: 14px; height: 14px; color: var(--gold-600); }
+
+    /* ── Billing toggle ─────────────────────────────────────── */
+    .billing-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: var(--ink-100);
+      border-radius: 999px;
+      padding: 4px;
+    }
+    .billing-btn {
+      padding: 9px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--fg-2);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      line-height: 1;
+    }
+    .billing-btn.active {
+      background: #fff;
+      color: var(--ink-900);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.10);
+    }
+    .billing-save-badge {
+      font-size: 11px;
+      font-weight: 800;
+      background: var(--gold);
+      color: var(--ink-900);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    /* ── Plan cards ─────────────────────────────────────────── */
+    .pricing-page-section { background: #fff; }
+    .pricing-page-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .plan-card {
+      border-radius: 24px;
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      border: 2px solid var(--line);
+      background: #fff;
+    }
+    .plan-card-highlight {
+      border-color: var(--gold);
+    }
+    .card-chip {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      letter-spacing: 0.02em;
+    }
+    .card-chip-popular {
+      background: var(--gold);
+      color: var(--ink-900);
+    }
+    .card-chip-dark {
+      background: var(--ink-900);
+      color: #fff;
+    }
+    .plan-label {
+      font-size: 18px;
+      font-weight: 800;
+      color: inherit;
+    }
+    .plan-featured .plan-label { color: #fff; }
+    .plan-desc {
+      font-size: 13px;
+      color: var(--fg-2);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .plan-featured .plan-desc { color: rgba(252,247,237,0.65); }
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .plan-amount {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .plan-featured .plan-amount { color: #fff; }
+    .plan-per {
+      font-size: 14px;
+      color: var(--fg-3);
+      font-weight: 600;
+    }
+    .plan-featured .plan-per { color: rgba(252,247,237,0.5); }
+    .plan-commission {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .plan-commission-std { background: var(--ink-100); color: var(--ink-700); }
+    .plan-commission-pro { background: var(--ink-100); color: var(--ink-700); }
+    .plan-commission-custom { background: var(--ink-100); color: var(--ink-600); }
+    .plan-good-if {
+      font-size: 13px;
+      color: var(--fg-3);
+      border-top: 1.5px solid var(--line);
+      padding-top: 14px;
+    }
+    .plan-featured .plan-good-if { color: rgba(252,247,237,0.5); border-color: rgba(255,255,255,0.12); }
+    .plan-good-if strong { color: var(--fg-2); display: block; margin-bottom: 2px; }
+    .plan-featured .plan-good-if strong { color: rgba(252,247,237,0.75); }
+    .plan-features-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--fg-3);
+      margin-bottom: -8px;
+    }
+    .plan-featured .plan-features-label { color: rgba(252,247,237,0.45); }
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--fg-2);
+      line-height: 1.45;
+    }
+    .plan-featured .plan-features li { color: rgba(252,247,237,0.75); }
+    .plan-features li .pf-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .plan-features li .pf-icon-check { color: var(--emerald-500); }
+    .plan-featured .plan-features li .pf-icon-check { color: var(--gold); }
+    .plan-cta { margin-top: auto; }
+    .plan-cta-link {
+      display: block;
+      text-align: center;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: filter 0.15s, box-shadow 0.2s;
+    }
+    .plan-cta-std {
+      background: var(--ink-100);
+      color: var(--ink-900);
+    }
+    .plan-cta-std:hover { filter: brightness(0.95); }
+    .plan-cta-pro {
+      background: var(--gold);
+      color: var(--ink-900);
+      box-shadow: 0 4px 16px rgba(246,197,7,0.4);
+    }
+    .plan-cta-pro:hover { filter: brightness(0.96); }
+    .plan-cta-custom {
+      background: transparent;
+      color: var(--ink-900);
+      border: 1.5px solid var(--line);
+    }
+    .plan-cta-custom:hover { background: var(--ink-50); }
+
+    /* ── Comparison table ──────────────────────────────────── */
+    .compare-section { background: var(--bg); }
+    .compare-wrap {
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1.5px solid var(--line);
+      background: #fff;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 540px;
+    }
+    .compare-table thead th {
+      padding: 18px 20px;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+      border-bottom: 1.5px solid var(--line);
+    }
+    .compare-table thead th:first-child { width: 45%; color: var(--fg-3); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .compare-table thead th:not(:first-child) { text-align: center; color: var(--ink-900); font-size: 15px; }
+    .compare-table thead th.col-pro { color: var(--ink-900); background: rgba(246,197,7,0.08); }
+    .compare-table tbody tr:nth-child(even) td { background: rgba(20,20,19,0.02); }
+    .compare-table tbody td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--fg-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-table tbody td:first-child { font-weight: 600; color: var(--ink-900); }
+    .compare-table tbody td:not(:first-child) { text-align: center; }
+    .compare-table tbody td.col-pro { background: rgba(246,197,7,0.04); }
+    .compare-table tfoot td {
+      padding: 18px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-900);
+      text-align: center;
+    }
+    .compare-table tfoot td:first-child { text-align: left; color: var(--fg-3); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
+    .compare-table tfoot td.col-pro { background: rgba(246,197,7,0.06); }
+    .ct-yes { color: var(--emerald-600); font-size: 16px; }
+    .ct-no  { color: var(--ink-300); font-size: 16px; }
+    .ct-custom { color: var(--ink-500); font-size: 13px; font-weight: 700; }
+
+    /* ── Savings comparison ─────────────────────────────────── */
+    .savings-section { background: #fff; }
+    .savings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+    .sav-card {
+      border-radius: 20px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sav-card-eatfuti {
+      background: var(--ink-900);
+      color: #fff;
+      position: relative;
+    }
+    .sav-card-third {
+      background: var(--ink-50);
+      border: 1.5px solid var(--line);
+    }
+    .sav-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--ink-900);
+      width: fit-content;
+    }
+    .sav-label { font-size: 16px; font-weight: 800; }
+    .sav-card-eatfuti .sav-label { color: #fff; }
+    .sav-amount {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .sav-card-eatfuti .sav-amount { color: var(--gold); }
+    .sav-card-third .sav-amount { color: var(--danger); }
+    .sav-sub { font-size: 12px; color: rgba(252,247,237,0.5); }
+    .sav-card-third .sav-sub { color: var(--fg-3); }
+    .sav-note {
+      font-size: 12px;
+      text-align: center;
+      color: var(--fg-3);
+      max-width: 600px;
+      margin-inline: auto;
+      margin-top: 20px;
+    }
+    .sav-year-save {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      padding: 0 20px 10px;
+      background: rgba(246, 197, 7, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(246, 197, 7, 0.45);
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--ink-900);
+      white-space: nowrap;
+      box-shadow: 0 2px 16px rgba(246, 197, 7, 0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .sav-year-save-wrap {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    /* ── Testimonials ───────────────────────────────────────── */
+    .pricing-proof { background: var(--bg); }
+    .pricing-test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .ptc {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .ptc-stars { font-size: 15px; letter-spacing: 2px; color: var(--gold-600); }
+    .ptc blockquote {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      font-style: italic;
+      flex: 1;
+    }
+    .ptc-meta strong { font-size: 13px; font-weight: 700; display: block; }
+    .ptc-meta small { color: var(--fg-3); font-size: 12px; }
+
+    /* ── FAQ ────────────────────────────────────────────────── */
+    .faq-section { background: #fff; }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 760px;
+      margin-inline: auto;
+    }
+    .faq-item {
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 22px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      gap: 12px;
+      background: none;
+      width: 100%;
+      text-align: left;
+      color: var(--ink-900);
+    }
+    .faq-q:hover { background: rgba(20,20,19,0.03); }
+    .faq-toggle {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: var(--ink-100);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.25s;
+    }
+    .faq-toggle .icon { width: 14px; height: 14px; }
+    .faq-item.open .faq-toggle { background: var(--gold); transform: rotate(45deg); }
+    .faq-a {
+      padding: 0 22px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s var(--ease-out), padding 0.3s;
+      font-size: 14px;
+      color: var(--fg-2);
+      line-height: 1.65;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+
+    /* ── Final CTA ──────────────────────────────────────────── */
+    .pricing-cta-section { background: #ffffff; padding: 0; }
+    .pricing-cta-card {
+      background: #141413;
+      padding: clamp(64px, 8vw, 96px) clamp(24px, 5vw, 64px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pricing-cta-card::before {
+      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 360px;
+      background: radial-gradient(ellipse, rgba(246,197,7,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-cta-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 720px; }
+    .pricing-cta-card h2 { color: #fff; margin: 0 0 16px; font-size: clamp(30px, 4vw, 48px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
+    .pricing-cta-card p { color: rgba(255,255,255,0.6); margin: 0 0 32px; max-width: 440px; font-size: 16px; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .pricing-page-grid { grid-template-columns: 1fr 1fr; }
+      .plan-card:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .pricing-page-grid { grid-template-columns: 1fr; }
+      .plan-card:last-child { grid-column: auto; }
+      .savings-grid { grid-template-columns: 1fr; }
+      .pricing-test-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Shared SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-plus"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-check"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-spark"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+    <symbol id="i-star"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6L12 16.8 6.6 19.6l1-6L3.3 9.4l6-.9L12 3z"/></symbol>
+    <symbol id="i-package"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 2 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+    <symbol id="i-chev-r"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-chev-l"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
+    <symbol id="i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="i-trend"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+  </defs>
+</svg>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="EatFuti home">
+      <img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28">
+      <span class="brand-name">EatFuti</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="pricing.html" aria-current="page">Pricing</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-ghost">Sign in</a>
+      <a href="contact.html" class="btn btn-nav-cta">
+        Get a Free Demo <svg class="icon"><use href="#i-arrow"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="index.html" class="brand"><img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28"><span class="brand-name">EatFuti</span></a>
+    <button class="hamburger" id="closeMobile" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="contact.html">Contact</a>
+  <div class="mobile-nav-cta">
+    <a href="contact.html" class="btn btn-ghost">Sign in</a>
+    <a href="contact.html" class="btn btn-gold">Get started</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow reveal">Built for ethnic &amp; local restaurants</span>
+      <h1 class="reveal">Simple plans,<br>easy to understand.</h1>
+      <p class="lede reveal">Easy to use. We set everything up for you. And a real expert — who speaks your language — is always here to help.</p>
+      <div class="trust-row reveal">
+        <span class="trust-chip"><svg class="icon"><use href="#i-check"/></svg> No setup fee</span>
+        <span class="trust-chip"><svg class="icon"><use href="#i-check"/></svg> No long-term contracts</span>
+        <span class="trust-chip"><svg class="icon"><use href="#i-check"/></svg> Cancel anytime</span>
+        <span class="trust-chip"><svg class="icon"><use href="#i-check"/></svg> We cover card fees</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Plan cards ────────────────────────────────────────── -->
+  <section class="pricing-page-section">
+    <div class="container">
+      <div class="billing-toggle-wrap reveal">
+        <div class="billing-toggle">
+          <button class="billing-btn active" data-period="monthly">Monthly</button>
+          <button class="billing-btn" data-period="yearly">Yearly <span class="billing-save-badge">2 months free</span></button>
+        </div>
+      </div>
+
+      <div class="pricing-page-grid reveal">
+
+        <!-- Standard -->
+        <div class="plan-card plan-card-highlight">
+          <span class="card-chip card-chip-popular"><svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg> Most popular</span>
+          <div class="plan-label">Standard</div>
+          <p class="plan-desc">Everything you need, at our lowest monthly price.</p>
+          <div class="plan-price">
+            <span class="plan-amount" id="price-standard">$249</span>
+            <span class="plan-per">/mo</span>
+          </div>
+          <span class="plan-commission plan-commission-std">+ 5% per order</span>
+          <div class="plan-good-if">
+            <strong>Good if</strong>
+            you're just starting or get fewer online orders.
+          </div>
+          <div class="plan-features-label">What you get</div>
+          <ul class="plan-features">
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> A website that shows up first on Google</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Take orders on your website &amp; app</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Your own phone app for customers</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Get &amp; reply to your Google reviews</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Text &amp; email your customers + rewards</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Daily Facebook &amp; Instagram posts</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Real expert who speaks your language</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Free photo shoots 2× a year</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> We cover your credit card fees</li>
+          </ul>
+          <div class="plan-cta">
+            <a href="contact.html" class="plan-cta-link plan-cta-pro">Get Started</a>
+          </div>
+        </div>
+
+        <!-- Pro -->
+        <div class="plan-card">
+          <span class="card-chip card-chip-dark">Keep 100%</span>
+          <div class="plan-label">Pro</div>
+          <p class="plan-desc">Keep 100% with no commission.</p>
+          <div class="plan-price">
+            <span class="plan-amount" id="price-pro">$500</span>
+            <span class="plan-per">/mo</span>
+          </div>
+          <span class="plan-commission plan-commission-pro">0% — keep every dollar</span>
+          <div class="plan-good-if">
+            <strong>Good if</strong>
+            you sell $5,000+ a month online — it pays for itself.
+          </div>
+          <div class="plan-features-label">Everything in Standard, plus</div>
+          <ul class="plan-features">
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Zero commission on every order</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Priority setup &amp; dedicated helper</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> All Standard features included</li>
+          </ul>
+          <div class="plan-cta">
+            <a href="contact.html" class="plan-cta-link plan-cta-custom">Talk to us</a>
+          </div>
+        </div>
+
+        <!-- Custom -->
+        <div class="plan-card">
+          <span class="card-chip card-chip-dark">For special needs</span>
+          <div class="plan-label">Custom</div>
+          <p class="plan-desc">Need something special? We build a plan just for you.</p>
+          <div class="plan-price">
+            <span class="plan-amount" style="font-size:1.8rem;">Let's talk</span>
+          </div>
+          <span class="plan-commission plan-commission-custom">Made to fit your restaurant</span>
+          <div class="plan-good-if">
+            <strong>Good if</strong>
+            you have many locations or special requests.
+          </div>
+          <div class="plan-features-label">Everything in Pro, plus</div>
+          <ul class="plan-features">
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> More than one location</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Special features made just for you</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Help moving from your old system</li>
+            <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Priority setup with dedicated helper</li>
+          </ul>
+          <div class="plan-cta">
+            <a href="contact.html" class="plan-cta-link plan-cta-custom">Contact us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Comparison table ──────────────────────────────────── -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="section-head section-head-center reveal">
+        <h2>Compare the plans</h2>
+        <p class="lede">Everything is included in every plan — you only choose how you pay.</p>
+      </div>
+      <div class="compare-wrap reveal">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Standard</th>
+              <th class="col-pro">Pro</th>
+              <th>Custom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Website built to rank on Google</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Ordering (website &amp; app)</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Your own branded app</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Daily social media (human-verified)</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Email + SMS marketing &amp; loyalty</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Google reviews + replies</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>2× / year photo shoots</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Helper who speaks your language</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>We cover your credit card fees</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
+            <tr><td>Multiple locations</td><td><span class="ct-no">—</span></td><td class="col-pro"><span class="ct-no">—</span></td><td><span class="ct-yes">✓</span></td></tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Monthly price</td>
+              <td>$249</td>
+              <td class="col-pro">$500</td>
+              <td><span class="ct-custom">Let's talk</span></td>
+            </tr>
+            <tr>
+              <td>Commission per order</td>
+              <td>5%</td>
+              <td class="col-pro">0%</td>
+              <td><span class="ct-custom">Custom</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Savings comparison ────────────────────────────────── -->
+  <section class="savings-section">
+    <div class="container">
+      <div class="section-head section-head-center reveal">
+        <span class="eyebrow">Either plan beats delivery apps</span>
+        <h2>3rd-party apps take 25–30% of every order</h2>
+        <p class="lede">EatFuti is one flat fee, we cover your credit card fees, and our marketing brings you more orders too — you save and you sell more.</p>
+      </div>
+      <p style="text-align:center;font-size:14px;color:var(--fg-3);margin-top:-24px;margin-bottom:28px;">Example: a restaurant doing $10,000/month in online orders.</p>
+      <div class="savings-grid reveal">
+        <div class="sav-card sav-card-third">
+          <svg style="width:28px;height:28px;color:var(--ink-400)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 2 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <div class="sav-label">3rd-party apps</div>
+          <div class="sav-amount">-$2,800</div>
+          <div class="sav-sub" style="color:var(--fg-3)">~28% commission + card fees per month</div>
+        </div>
+        <div class="sav-card sav-card-eatfuti">
+          <span class="sav-tag"><svg style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Save ~$2,300/mo</span>
+          <div class="sav-label">EatFuti Pro</div>
+          <div class="sav-amount">-$500</div>
+          <div class="sav-sub">flat $500/mo · 0% commission · card fees covered</div>
+        </div>
+      </div>
+      <div class="sav-year-save-wrap reveal">
+        <div class="sav-year-save">
+          About <strong>$27,600 a year saved</strong> — plus more orders from your marketing.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ──────────────────────────────────────── -->
+  <section class="pricing-proof">
+    <div class="container">
+      <div class="section-head section-head-center reveal">
+        <h2>Loved by local &amp; ethnic restaurants</h2>
+        <p class="lede">Real owners, real results — across every kind of cuisine.</p>
+      </div>
+      <div class="pricing-test-grid reveal">
+        <div class="ptc">
+          <div class="ptc-stars">★★★★★</div>
+          <blockquote>"People finally find us on Google, and the daily posts bring in customers we never reached before — without the 30% commission."</blockquote>
+          <div class="ptc-meta">
+            <strong>A Vietnamese restaurant</strong>
+            <small>Des Moines</small>
+          </div>
+        </div>
+        <div class="ptc">
+          <div class="ptc-stars">★★★★★</div>
+          <blockquote>"The app and rewards keep our regulars coming back, and the team speaks our language. That meant everything."</blockquote>
+          <div class="ptc-meta">
+            <strong>A taquería</strong>
+            <small>West Des Moines</small>
+          </div>
+        </div>
+        <div class="ptc">
+          <div class="ptc-stars">★★★★★</div>
+          <blockquote>"We switched from the delivery apps and kept our profit — EatFuti even covers the card fees. Best decision for our family restaurant."</blockquote>
+          <div class="ptc-meta">
+            <strong>A sushi &amp; ramen spot</strong>
+            <small>Ankeny</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────── -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-head section-head-center reveal">
+        <span class="eyebrow">Common questions</span>
+        <h2>Pricing questions answered</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Do you take a commission on my orders?
+            <span class="faq-toggle"><svg class="icon"><use href="#i-plus"/></svg></span>
+          </button>
+          <div class="faq-a">On Standard you pay 5% per order. On Pro it's 0% — you keep 100%. Either way it's a flat platform, and we cover your credit card processing fees.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Is there a setup fee?
+            <span class="faq-toggle"><svg class="icon"><use href="#i-plus"/></svg></span>
+          </button>
+          <div class="faq-a">Setup is included in your monthly plan. It covers building your website and app, Google setup, importing your menu, and getting your photos and social media ready.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            What does "Automatic Intelligence" mean?
+            <span class="faq-toggle"><svg class="icon"><use href="#i-plus"/></svg></span>
+          </button>
+          <div class="faq-a">It's the smart technology behind EatFuti — the ".AI" in EatFuti Inc. stands for Automatic Intelligence. It does the heavy lifting, and our restaurant experts always check the work before it reaches your customers.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            I run an ethnic restaurant — can you handle my dishes and language?
+            <span class="faq-toggle"><svg class="icon"><use href="#i-plus"/></svg></span>
+          </button>
+          <div class="faq-a">Yes — that's exactly who we're built for. We keep your dish names authentic, post in your style, and support you in your own language.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            I have more than one location?
+            <span class="faq-toggle"><svg class="icon"><use href="#i-plus"/></svg></span>
+          </button>
+          <div class="faq-a">Each location runs on its own plan, or ask us about a Custom plan built around all your locations.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section class="pricing-cta-section">
+    <div class="pricing-cta-card reveal">
+      <div class="pricing-cta-copy">
+        <h2>We set it all up for you.</h2>
+        <p>Get started today and cancel any time. No contracts, no hidden fees.</p>
+        <a href="contact.html" class="btn-prestige btn-prestige-inv">
+          <span class="btn-prestige-label">Get started</span>
+          <span class="btn-prestige-icon"><svg class="icon"><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28">
+          <span class="brand-name">EatFuti</span>
+        </a>
+        <p>The growth platform for ethnic &amp; local restaurants. Get found, sell more, keep your profit.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Talk to our team</a></li>
+          <li><a href="pricing.html">Get started</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in touch</h5>
+        <ul class="footer-contact">
+          <li>(515) 493-0243</li>
+          <li>hello@eatfuti.ai</li>
+          <li>Des Moines, IA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EatFuti Inc. · Built for ethnic &amp; local restaurants · One flat platform. Zero commission on Pro. We cover your credit card fees.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var header = document.getElementById('siteHeader');
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var hamburger = document.getElementById('hamburger');
+  var closeBtn  = document.getElementById('closeMobile');
+  var drawer    = document.getElementById('mobileNav');
+  function openNav()  { drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeNav() { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  hamburger.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  var billingBtns = document.querySelectorAll('.billing-btn');
+  var priceStandard = document.getElementById('price-standard');
+  var pricePro = document.getElementById('price-pro');
+  billingBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      billingBtns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      var yearly = this.dataset.period === 'yearly';
+      priceStandard.textContent = yearly ? '$208' : '$249';
+      pricePro.textContent = yearly ? '$417' : '$500';
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o){ o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
