@@ -295,22 +295,37 @@ section {
 /* Full-bleed hero: copy stays aligned with the page, image scales to the right edge */
 .hero .container.hero-grid {
   max-width: none;
-  padding-right: 0;
+  padding-right: clamp(48px, 5vw, 64px);
   padding-left: clamp(48px, 5vw, 64px);
+  padding-bottom: clamp(100px, 12vw, 160px);
 }
 .hero-grid {
   position: relative; z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 5vw, 72px);
+  gap: clamp(64px, 8vw, 112px);
   align-items: center;
 }
-.hero-mock { position: relative; min-width: 0; }
+.hero-mock { position: relative; min-width: 0; overflow: visible; }
 .hero-image {
   width: 100%;
   height: auto;
-  border-radius: 20px 0 0 20px;
+  border-radius: 20px;
   box-shadow: none;
+}
+.hero-platform-badge {
+  position: absolute;
+  bottom: -64px;
+  left: 0;
+  transform-origin: bottom left;
+  width: clamp(365px, 65%, 565px);
+  z-index: 10;
+  pointer-events: none;
+  animation: platform-float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes platform-float {
+  0%, 100% { transform: translate(-33%, 50%) scale(1.15); }
+  50%       { transform: translate(-33%, calc(50% - 16px)) scale(1.15); }
 }
 @keyframes hero-float {
   0%, 100% { transform: translateY(0px); }
@@ -837,17 +852,20 @@ section {
 /* Tab 3 — Loyalty (pink-yellow gradient) */
 .tab-loyalty {
   background: linear-gradient(135deg, #F472B6 0%, #FB7185 18%, #FB923C 42%, #FBBF24 68%, #FEF08A 100%);
-  padding-right: 24px;
+  padding-right: 56px;
+  overflow: hidden;
 }
 .tab-loyalty .tab-left { color: #141413; }
 .tab-loyalty h3 { color: #141413; }
 .tab-loyalty .tab-features li { color: #3a2a1a; }
 .tab-loyalty .btn-tab-cta { background: #141413; color: #fff; }
-.tab-loyalty .tab-right { overflow: hidden; border-radius: 0 24px 24px 0; padding: 0; flex: 1 1 52%; display: flex; align-items: flex-end; justify-content: flex-end; }
+.tab-loyalty .tab-right { overflow: hidden; border-radius: 0 24px 24px 0; padding: 0; flex: 1 1 65%; align-self: stretch; display: flex; align-items: center; justify-content: center; }
 
 /* Loyalty image */
 .tab-loyalty-img { width: 100%; max-width: none; }
 .tab-loyalty-img img { width: 100%; height: auto; display: block; }
+
+.loyalty-card-img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 /* Tab 4 — Dashboard (warm neutral) */
 .tab-dashboard { background: linear-gradient(to right, #FDE68A 0%, #FEF3C0 100%); padding-left: 56px; padding-right: 56px; }
