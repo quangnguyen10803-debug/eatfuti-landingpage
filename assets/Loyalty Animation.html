@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loyalty Animation</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /*
+     * Scene is a square container. The phone (ratio 458:929 ≈ 0.493:1) is sized
+     * by height (88% of scene) so width auto ≈ 43% of scene. Popup cards are
+     * sized by width (% of scene) and positioned to partially overlap the phone.
+     *
+     * Phone geometry at 480px scene:
+     *   phone-h = 422px, phone-w = 208px (43.3%)
+     *   phone left-edge  = (480-208)/2 = 136px  (28.3%)
+     *   phone right-edge = 136+208     = 344px  (71.7%)
+     *
+     * Popup left edge ≈ 4%, right edge ≈ 50%  → 22% overlap with phone
+     * Gift  left edge ≈ 47%, right edge ≈ 97% → 25% overlap with phone right
+     */
+    .loyalty-scene {
+      position: relative;
+      /* square; shrinks on narrow viewports */
+      width:  min(480px, 90vw, 90vh);
+      height: min(480px, 90vw, 90vh);
+    }
+
+    /* ── Phone (static) ──────────────────────────────────────── */
+    .phone {
+      position: absolute;
+      height: 88%;
+      width: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      display: block;
+      animation: phoneIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes phoneIn {
+      from { opacity: 0; transform: translate(-50%, -46%) scale(0.97); }
+      to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* ── Popups (shared base) ────────────────────────────────── */
+    .popup {
+      position: absolute;
+      z-index: 2;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /*
+     * COIN  (+199 coins) — top-left
+     * SVG intrinsic: 431×144  (ratio 2.99:1)
+     * width 46% → at 480px: 220px wide × 74px tall
+     */
+    .coin-popup {
+      width: 47%;
+      top: 16%;     /* ≈ 77px — sits ~10px below phone's top edge */
+      left: 4%;
+      animation: popLeft 10s cubic-bezier(0.22, 1, 0.36, 1) 0.4s infinite;
+    }
+
+    /*
+     * GIFT  (Rewards capybara) — middle-right
+     * SVG intrinsic: 453×144  (ratio 3.15:1)
+     * width 48% → at 480px: 230px wide × 73px tall
+     */
+    .gift-popup {
+      width: 50%;
+      top: 38%;     /* ≈ 182px — roughly 1/3 down the phone */
+      right: 3%;
+      animation: popRight 10s cubic-bezier(0.22, 1, 0.36, 1) 0.4s infinite;
+    }
+
+    /*
+     * VOUCHER (15% off) — bottom-left
+     * SVG intrinsic: 431×144  (ratio 2.99:1)
+     * width 44% → at 480px: 211px wide × 71px tall
+     */
+    .voucher-popup {
+      width: 45%;
+      bottom: 8%;   /* ≈ 38px — sits ~20px above phone's bottom edge */
+      left: 4%;
+      animation: popLeftLate 10s cubic-bezier(0.22, 1, 0.36, 1) 0.4s infinite;
+    }
+
+    /*
+     * ── Keyframes ────────────────────────────────────────────────
+     *
+     * Total cycle: 10 s
+     *
+     *  Coin     slide-in:  5%–13%   (0.5–1.3s)
+     *  Gift     slide-in: 14%–22%   (1.4–2.2s)
+     *  Voucher  slide-in: 23%–31%   (2.3–3.1s)
+     *
+     *  All three float 31%–74%  (3.1–7.4s)
+     *
+     *  Coin     fade-out: 74%–82%   (7.4–8.2s)
+     *  Gift     fade-out: 77%–85%   (7.7–8.5s)
+     *  Voucher  fade-out: 80%–88%   (8.0–8.8s)
+     *
+     *  Gap (all hidden): 88%–100%  (8.8–10s)
+     */
+
+    @keyframes popLeft {
+      0%,  4% { opacity: 0; transform: translateX(-26px) translateY(0px); }
+      13%      { opacity: 1; transform: translateX(0px)   translateY(0px); }
+      /* float: roughly 3 s period, offset 0 */
+      29%      { transform: translateX(0px) translateY(0px);  }
+      38%      { transform: translateX(0px) translateY(-8px); }
+      47%      { transform: translateX(0px) translateY(0px);  }
+      56%      { transform: translateX(0px) translateY(-8px); }
+      65%      { transform: translateX(0px) translateY(0px);  }
+      /* exit */
+      74%      { opacity: 1; transform: translateX(0px) translateY(0px); }
+      82%      { opacity: 0; transform: translateX(-20px) translateY(0px); }
+      100%     { opacity: 0; transform: translateX(-26px) translateY(0px); }
+    }
+
+    @keyframes popRight {
+      0%, 13% { opacity: 0; transform: translateX(26px) translateY(0px); }
+      22%      { opacity: 1; transform: translateX(0px)  translateY(0px); }
+      /* float: same period, phase-shifted +0.5 cycle ≈ half a bob behind */
+      33%      { transform: translateX(0px) translateY(-8px); }
+      42%      { transform: translateX(0px) translateY(0px);  }
+      51%      { transform: translateX(0px) translateY(-8px); }
+      60%      { transform: translateX(0px) translateY(0px);  }
+      69%      { transform: translateX(0px) translateY(-8px); }
+      /* exit */
+      77%      { opacity: 1; transform: translateX(0px) translateY(0px); }
+      85%      { opacity: 0; transform: translateX(20px) translateY(0px); }
+      100%     { opacity: 0; transform: translateX(26px) translateY(0px); }
+    }
+
+    @keyframes popLeftLate {
+      0%, 22% { opacity: 0; transform: translateX(-26px) translateY(0px); }
+      31%      { opacity: 1; transform: translateX(0px)   translateY(0px); }
+      /* float: phase-shifted +0.25 cycle */
+      37%      { transform: translateX(0px) translateY(-4px); }
+      46%      { transform: translateX(0px) translateY(-8px); }
+      55%      { transform: translateX(0px) translateY(0px);  }
+      64%      { transform: translateX(0px) translateY(-8px); }
+      73%      { transform: translateX(0px) translateY(0px);  }
+      /* exit */
+      80%      { opacity: 1; transform: translateX(0px) translateY(0px); }
+      88%      { opacity: 0; transform: translateX(-20px) translateY(0px); }
+      100%     { opacity: 0; transform: translateX(-26px) translateY(0px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loyalty-scene">
+    <img class="phone"
+         src="../loyalty animation/phone image.png"
+         alt="EatFuti loyalty passport app">
+
+    <img class="popup coin-popup"
+         src="../loyalty animation/coins.svg"
+         alt="+199 coins — earn coins to gain voucher">
+
+    <img class="popup gift-popup"
+         src="../loyalty animation/gift.svg"
+         alt="Rewards — you received a Capybara Pack">
+
+    <img class="popup voucher-popup"
+         src="../loyalty animation/voucher.svg"
+         alt="15% off voucher — apply to all restaurants">
+  </div>
+</body>
+</html>

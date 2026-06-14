@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Search Animation</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .scene {
+      width: 452px;
+      max-width: calc(100vw - 40px);
+    }
+
+    /* ─── Search bar ─── */
+    .sbar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 64px;
+      padding: 0 20px;
+      background: #ffffff;
+      border-radius: 16px;
+      transform-origin: center center;
+    }
+
+    .sbar-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      font-size: 15.5px;
+      font-weight: 500;
+      color: #3F3D38;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 18px;
+      background: #3F3D38;
+      border-radius: 1px;
+      margin-left: 1px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Results area ─── */
+    .results {
+      margin-top: 18px;
+      height: 320px;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item {
+      height: 99px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      flex-shrink: 0;
+      will-change: transform;
+      position: relative;
+    }
+
+    /* Skeleton placeholders */
+    .item.ph { background: rgba(255,255,255,0.10); }
+
+    .ph-thumb {
+      width: 67px;
+      height: 67px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.28);
+      flex-shrink: 0;
+    }
+
+    .ph-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ph-line {
+      border-radius: 4px;
+      background: rgba(255,255,255,0.28);
+    }
+    .ph-line.t { height: 12px; border-radius: 6px; width: 55%; }
+    .ph-line.l { height: 8px; width: 97%; }
+    .ph-line.s { height: 8px; width: 38%; }
+
+    /* Main restaurant result */
+    .item.main {
+      background: #ffffff;
+      z-index: 2;
+    }
+
+    .main-img {
+      width: 67px;
+      height: 67px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .main-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .main-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #141413;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+
+    .main-meta {
+      font-size: 12px;
+      color: #5c5a55;
+      line-height: 1.4;
+    }
+
+    .main-sub {
+      font-size: 11.5px;
+      color: #9a9890;
+    }
+
+    .main-badge {
+      flex-shrink: 0;
+      background: #F6C507;
+      color: #141413;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      align-self: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="scene">
+
+  <!-- Search bar -->
+  <div class="sbar" id="sbar">
+    <!-- Magnifying glass icon (matches SVG) -->
+    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" aria-hidden="true" flex-shrink="0" style="flex-shrink:0">
+      <circle cx="8.5" cy="8.5" r="5.75" stroke="#01010E" stroke-opacity="0.68" stroke-width="1.5"/>
+      <path d="M13 13L17.5 17.5" stroke="#01010E" stroke-opacity="0.68" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+
+    <div class="sbar-text">
+      <span id="stext"></span><span class="cursor" id="cur"></span>
+    </div>
+
+    <!-- X / close icon (matches SVG) -->
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="flex-shrink:0;opacity:0.38">
+      <circle cx="10" cy="10" r="8.75" fill="#02021D"/>
+      <path d="M7 7l6 6M13 7l-6 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Results dropdown -->
+  <div class="results" id="results">
+    <div class="items" id="items">
+
+      <div class="item ph" id="ph1">
+        <div class="ph-thumb"></div>
+        <div class="ph-lines">
+          <div class="ph-line t"></div>
+          <div class="ph-line l"></div>
+          <div class="ph-line s"></div>
+        </div>
+      </div>
+
+      <div class="item ph" id="ph2">
+        <div class="ph-thumb"></div>
+        <div class="ph-lines">
+          <div class="ph-line t"></div>
+          <div class="ph-line l"></div>
+          <div class="ph-line s"></div>
+        </div>
+      </div>
+
+      <div class="item ph" id="ph3">
+        <div class="ph-thumb"></div>
+        <div class="ph-lines">
+          <div class="ph-line t"></div>
+          <div class="ph-line l"></div>
+          <div class="ph-line s"></div>
+        </div>
+      </div>
+
+      <!-- Main highlighted restaurant result (starts off-screen below) -->
+      <div class="item main" id="main">
+        <div class="main-img"><img src="fried chicken.png" alt="Fried Chicken"></div>
+        <div class="main-body">
+          <div class="main-name">Phở Hà Nội</div>
+          <div class="main-meta">⭐ 4.9 · Vietnamese · 0.3 mi</div>
+          <div class="main-sub">Open now · 20–30 min</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var TEXT = 'Restaurants near me';
+
+  // ── Timeline (all in ms) ──────────────────────────────────────
+  var PAUSE     = 400;   // initial hold before typing
+  var TYPE_DUR  = 1000;  // typing "Restaurants near me"
+  var SCALE_DUR = 250;   // search bar scale-back after typing
+  var MOVE_LAG  = 200;   // gap between scale-back and item move
+  var MOVE_DUR  = 500;   // item reorder animation (ease-in-out)
+  var HOLD_DUR  = 2200;  // hold final state before looping
+
+  var TYPE_S  = PAUSE;
+  var TYPE_E  = TYPE_S + TYPE_DUR;
+  var SCALE_E = TYPE_E + SCALE_DUR;
+  var MOVE_S  = SCALE_E + MOVE_LAG;
+  var MOVE_E  = MOVE_S  + MOVE_DUR;
+  var TOTAL   = MOVE_E  + HOLD_DUR;
+
+  // Item dimensions (must match CSS)
+  var ITEM_H = 99;
+  var GAP    = 12;
+  var UNIT   = ITEM_H + GAP;  // 111px per slot
+  var DIST   = UNIT * 3;      // 333px — main item travel distance (up)
+
+  // DOM refs
+  var sbar  = document.getElementById('sbar');
+  var stext = document.getElementById('stext');
+  var cur   = document.getElementById('cur');
+  var ph1   = document.getElementById('ph1');
+  var ph2   = document.getElementById('ph2');
+  var ph3   = document.getElementById('ph3');
+  var main  = document.getElementById('main');
+
+  var t = 0, last = null;
+
+  // ── Easing ───────────────────────────────────────────────────
+  function easeOut(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  function easeInOut(x) {
+    return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  }
+
+  function clamp(x, lo, hi) {
+    return x < lo ? lo : x > hi ? hi : x;
+  }
+
+  // Normalised progress in [0,1] for a phase starting at `s` lasting `d`
+  function phase(time, s, d) {
+    return clamp((time - s) / d, 0, 1);
+  }
+
+  // ── Reset to initial state (instant) ─────────────────────────
+  function reset() {
+    stext.textContent = '';
+    cur.style.opacity = '1';
+    sbar.style.transform = '';
+    main.style.transform = '';
+    ph1.style.transform  = '';
+    ph2.style.transform  = '';
+    ph3.style.transform  = '';
+  }
+
+  // ── Main render function ──────────────────────────────────────
+  function render(time) {
+    // ── 1. Typing ──
+    var tp = phase(time, TYPE_S, TYPE_DUR);
+    stext.textContent = TEXT.slice(0, Math.round(tp * TEXT.length));
+
+    // ── 2. Cursor blink (on during typing + 400ms after) ──
+    if (time < TYPE_E + 400) {
+      cur.style.opacity = (Math.floor(time / 480) % 2 === 0) ? '1' : '0';
+    } else {
+      cur.style.opacity = '0';
+    }
+
+    // ── 3. Search bar scale ──
+    //    1.0 → 1.05 while typing, ease back to 1.0 after done
+    var sc = 1;
+    if (time >= TYPE_S && time < TYPE_E) {
+      sc = 1 + 0.05 * tp;
+    } else if (time >= TYPE_E && time < SCALE_E) {
+      sc = 1.05 - 0.05 * easeOut(phase(time, TYPE_E, SCALE_DUR));
+    }
+    sbar.style.transform = (sc !== 1) ? 'scale(' + sc.toFixed(4) + ')' : '';
+
+    // ── 4. Item reorder ──
+    //    Raw progress (uneased) for scale bell curve
+    //    Eased progress for position (ease-out)
+    var rawP = phase(time, MOVE_S, MOVE_DUR);
+    var eP   = easeInOut(rawP);
+
+    if (rawP > 0) {
+      // Main item: slide UP by DIST, scale peaks at 1.05 mid-transition
+      var mSc = 1 + 0.05 * Math.sin(Math.PI * rawP);
+      var mTy = -DIST * eP;
+      main.style.transform = 'translateY(' + mTy.toFixed(2) + 'px) scale(' + mSc.toFixed(4) + ')';
+
+      // Placeholders: shift DOWN by one slot each
+      var phTy = (UNIT * eP).toFixed(2);
+      ph1.style.transform = 'translateY(' + phTy + 'px)';
+      ph2.style.transform = 'translateY(' + phTy + 'px)';
+      ph3.style.transform = 'translateY(' + phTy + 'px)';
+    }
+  }
+
+  // ── RAF loop ─────────────────────────────────────────────────
+  function loop(ts) {
+    if (!last) last = ts;
+    var dt = Math.min(64, ts - last);
+    last = ts;
+    t += dt;
+
+    if (t >= TOTAL) {
+      t = t % TOTAL;
+      reset();
+    }
+
+    render(t);
+    requestAnimationFrame(loop);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { requestAnimationFrame(loop); });
+  } else {
+    requestAnimationFrame(loop);
+  }
+})();
+</script>
+
+</body>
+</html>
