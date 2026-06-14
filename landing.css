@@ -865,7 +865,7 @@ section {
 .tab-loyalty-img { width: 100%; max-width: none; }
 .tab-loyalty-img img { width: 100%; height: auto; display: block; }
 
-.loyalty-card-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.loyalty-card-img { display: block; width: 100%; height: 100%; }
 
 /* Tab 4 — Dashboard (warm neutral) */
 .tab-dashboard { background: linear-gradient(to right, #FDE68A 0%, #FEF3C0 100%); padding-left: 56px; padding-right: 56px; }
