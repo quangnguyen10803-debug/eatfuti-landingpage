@@ -639,7 +639,7 @@ section {
 .float-anim { animation: float 3.4s ease-in-out infinite; }
 
 /* ==========================================================================
-   SECTION 1.5 — RESULTS MARQUEE (metric wall)
+   RESULTS MARQUEE — metric wall (owner.com-style)
    ========================================================================== */
 .results-section {
   background: var(--bg-page);
@@ -651,7 +651,6 @@ section {
 .results-marquee {
   width: 100%;
   overflow: hidden;
-  /* soft edge fades */
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
           mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
   padding-block: 8px;
@@ -675,14 +674,14 @@ section {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(20,20,19,0.05));
+  box-shadow: var(--shadow-sm);
   transition:
     transform var(--dur-base) var(--ease-out),
     box-shadow var(--dur-base) var(--ease-out);
 }
 .result-card:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-md, 0 8px 24px rgba(20,20,19,0.10));
+  box-shadow: var(--shadow-md);
 }
 .rc-metric {
   font-family: var(--font-mono);

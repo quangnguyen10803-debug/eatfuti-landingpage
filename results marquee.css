@@ -1,0 +1,70 @@
+/* ==========================================================================
+   SECTION 1.5 — RESULTS MARQUEE (metric wall)
+   ========================================================================== */
+.results-section {
+  background: var(--bg-page);
+  padding-block: clamp(64px, 8vw, 96px) clamp(56px, 7vw, 80px);
+  overflow: hidden;
+}
+.results-section .section-head { margin-bottom: clamp(32px, 4vw, 48px); }
+
+.results-marquee {
+  width: 100%;
+  overflow: hidden;
+  /* soft edge fades */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  padding-block: 8px;
+}
+.results-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+.results-marquee:hover .results-track { animation-play-state: paused; }
+
+.result-card {
+  width: 264px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 1px solid rgba(20,20,19,0.07);
+  border-radius: 18px;
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(20,20,19,0.05));
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md, 0 8px 24px rgba(20,20,19,0.10));
+}
+.rc-metric {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+  line-height: 1;
+}
+.rc-unit { font-size: 18px; color: var(--ink-500); font-weight: 500; }
+.rc-label { font-size: 13.5px; font-weight: 600; color: var(--ink-600); line-height: 1.4; }
+.rc-owner {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid rgba(20,20,19,0.07);
+}
+.rc-avatar {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+  background: var(--vanilla-cream);
+  border: 1px solid rgba(20,20,19,0.08);
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 14px; color: var(--ink-700);
+}
+.rc-owner b { display: block; font-size: 13px; font-weight: 700; color: var(--ink-900); line-height: 1.25; }
+.rc-owner small { font-size: 11.5px; color: var(--ink-500); }
