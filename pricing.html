@@ -22,6 +22,7 @@
       line-height: 1.05;
       margin: 0 0 20px;
     }
+    .page-hero h1 .h1-dim { color: var(--fg-3); font-weight: 800; }
     .page-hero .lede { max-width: 580px; margin-inline: auto; margin-bottom: 36px; }
 
     /* Trust chips row */
@@ -47,46 +48,92 @@
     }
     .trust-chip .icon { width: 14px; height: 14px; color: var(--gold-600); }
 
-    /* ── Billing toggle ─────────────────────────────────────── */
-    .billing-toggle-wrap {
+    /* ── Yearly badge chip ──────────────────────────────────── */
+    .yearly-badge-wrap {
       display: flex;
+      align-items: center;
       justify-content: center;
-      margin-bottom: 32px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
-    .billing-toggle {
+    .yearly-badge {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      background: var(--ink-100);
+      padding: 7px 20px;
+      background: var(--gold);
       border-radius: 999px;
-      padding: 4px;
-    }
-    .billing-btn {
-      padding: 9px 22px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      color: var(--fg-2);
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      line-height: 1;
-    }
-    .billing-btn.active {
-      background: #fff;
-      color: var(--ink-900);
-      box-shadow: 0 1px 6px rgba(0,0,0,0.10);
-    }
-    .billing-save-badge {
       font-size: 11px;
       font-weight: 800;
-      background: var(--gold);
+      letter-spacing: 0.08em;
       color: var(--ink-900);
-      padding: 2px 8px;
-      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px rgba(246,197,7,0.4), 0 0 0 1px rgba(246,197,7,0.2);
+    }
+    @keyframes badgeShine {
+      0%   { transform: translateX(-120%) skewX(-20deg); }
+      100% { transform: translateX(320%)  skewX(-20deg); }
+    }
+    .yearly-badge-shine {
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      animation: badgeShine 2.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* ── Billing toggle (iOS switch) ────────────────────────── */
+    .billing-toggle-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .billing-toggle-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .toggle-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg-2);
+      transition: color 0.2s;
+      user-select: none;
+      cursor: pointer;
+    }
+    .toggle-label.is-active { color: var(--ink-900); }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 30px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .toggle-switch input {
+      opacity: 0; width: 0; height: 0; position: absolute;
+    }
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      border-radius: 15px;
+      background: rgba(20,20,19,0.16);
+      transition: background 0.28s;
+    }
+    .toggle-switch input:checked + .toggle-track { background: var(--gold); }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .toggle-switch input:checked + .toggle-track .toggle-thumb {
+      transform: translateX(22px);
     }
 
     /* ── Plan cards ─────────────────────────────────────────── */
@@ -112,18 +159,19 @@
     }
     .card-chip {
       position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 12px;
+      top: 20px;
+      right: 20px;
+      left: auto;
+      transform: none;
+      font-size: 11px;
       font-weight: 800;
-      padding: 5px 14px;
+      padding: 5px 12px;
       border-radius: 999px;
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
     }
     .card-chip-popular {
       background: var(--gold);
@@ -148,32 +196,25 @@
     .plan-featured .plan-desc { color: rgba(252,247,237,0.65); }
     .plan-price {
       display: flex;
-      align-items: baseline;
-      gap: 4px;
+      align-items: center;
+      gap: 8px;
     }
     .plan-amount {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: 36px;
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1;
     }
     .plan-featured .plan-amount { color: #fff; }
-    .plan-per {
-      font-size: 14px;
-      color: var(--fg-3);
-      font-weight: 600;
-    }
-    .plan-featured .plan-per { color: rgba(252,247,237,0.5); }
-    .plan-commission {
+    .plan-subtext {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
       font-size: 13px;
-      font-weight: 700;
-      padding: 5px 10px;
-      border-radius: 8px;
-      display: inline-block;
+      font-weight: 600;
+      color: var(--fg-3);
+      line-height: 1.4;
     }
-    .plan-commission-std { background: var(--ink-100); color: var(--ink-700); }
-    .plan-commission-pro { background: var(--ink-100); color: var(--ink-700); }
-    .plan-commission-custom { background: var(--ink-100); color: var(--ink-600); }
     .plan-good-if {
       font-size: 13px;
       color: var(--fg-3);
@@ -246,52 +287,6 @@
     }
     .plan-cta-custom:hover { background: var(--ink-50); }
 
-    /* ── Comparison table ──────────────────────────────────── */
-    .compare-section { background: var(--bg); }
-    .compare-wrap {
-      overflow-x: auto;
-      border-radius: 20px;
-      border: 1.5px solid var(--line);
-      background: #fff;
-    }
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 540px;
-    }
-    .compare-table thead th {
-      padding: 18px 20px;
-      font-size: 13px;
-      font-weight: 800;
-      text-align: left;
-      border-bottom: 1.5px solid var(--line);
-    }
-    .compare-table thead th:first-child { width: 45%; color: var(--fg-3); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .compare-table thead th:not(:first-child) { text-align: center; color: var(--ink-900); font-size: 15px; }
-    .compare-table thead th.col-pro { color: var(--ink-900); background: rgba(246,197,7,0.08); }
-    .compare-table tbody tr:nth-child(even) td { background: rgba(20,20,19,0.02); }
-    .compare-table tbody td {
-      padding: 14px 20px;
-      font-size: 14px;
-      color: var(--fg-2);
-      border-bottom: 1px solid var(--line);
-    }
-    .compare-table tbody td:first-child { font-weight: 600; color: var(--ink-900); }
-    .compare-table tbody td:not(:first-child) { text-align: center; }
-    .compare-table tbody td.col-pro { background: rgba(246,197,7,0.04); }
-    .compare-table tfoot td {
-      padding: 18px 20px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--ink-900);
-      text-align: center;
-    }
-    .compare-table tfoot td:first-child { text-align: left; color: var(--fg-3); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
-    .compare-table tfoot td.col-pro { background: rgba(246,197,7,0.06); }
-    .ct-yes { color: var(--emerald-600); font-size: 16px; }
-    .ct-no  { color: var(--ink-300); font-size: 16px; }
-    .ct-custom { color: var(--ink-500); font-size: 13px; font-weight: 700; }
-
     /* ── Savings comparison ─────────────────────────────────── */
     .savings-section { background: #fff; }
     .savings-grid {
@@ -355,8 +350,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 28px;
-      padding: 0 20px 10px;
+      padding: 12px 16px;
       background: rgba(246, 197, 7, 0.18);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -370,7 +364,24 @@
     }
     .sav-year-save-wrap {
       text-align: center;
-      margin-top: 28px;
+    }
+    .sav-card-eatfuti .sav-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      overflow: hidden;
+    }
+    @keyframes savTagShine {
+      0%   { transform: translateX(-120%) skewX(-20deg); }
+      100% { transform: translateX(320%) skewX(-20deg); }
+    }
+    .sav-tag-shine {
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      animation: savTagShine 2.4s ease-in-out infinite;
+      pointer-events: none;
     }
 
     /* ── Testimonials ───────────────────────────────────────── */
@@ -451,27 +462,199 @@
     }
     .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
 
-    /* ── Final CTA ──────────────────────────────────────────── */
-    .pricing-cta-section { background: #ffffff; padding: 0; }
-    .pricing-cta-card {
-      background: #141413;
-      padding: clamp(64px, 8vw, 96px) clamp(24px, 5vw, 64px);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* ── Get in touch (2-col contact) ───────────────────────── */
+    .pricing-contact-section {
+      background: var(--bg);
+      padding-block: clamp(64px, 8vw, 96px);
+    }
+    .pricing-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .pricing-contact-left {
       display: flex;
       flex-direction: column;
+      gap: 28px;
+    }
+    .pricing-hours-chip {
+      display: inline-flex;
       align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--fg-2);
+      width: fit-content;
+      box-shadow: var(--shadow-xs);
     }
-    .pricing-cta-card::before {
-      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 360px;
-      background: radial-gradient(ellipse, rgba(246,197,7,0.14) 0%, transparent 70%);
-      pointer-events: none;
+    .pricing-hours-chip .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+      flex-shrink: 0;
     }
-    .pricing-cta-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 720px; }
-    .pricing-cta-card h2 { color: #fff; margin: 0 0 16px; font-size: clamp(30px, 4vw, 48px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
-    .pricing-cta-card p { color: rgba(255,255,255,0.6); margin: 0 0 32px; max-width: 440px; font-size: 16px; }
+    .pricing-contact-left h2 {
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--ink-900);
+    }
+    .pricing-contact-left h2 em {
+      font-style: italic;
+      color: var(--gold-600);
+    }
+    .pricing-contact-desc {
+      font-size: 15px;
+      color: var(--fg-2);
+      line-height: 1.65;
+      margin: 0;
+      max-width: 460px;
+    }
+    /* Blockquote-style contact info items */
+    .contact-info-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-info-item {
+      padding-left: 16px;
+      border-left: 3px solid var(--line);
+    }
+    .contact-info-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--ink-900);
+      margin-bottom: 3px;
+    }
+    .contact-info-value {
+      font-size: 14px;
+      color: var(--fg-2);
+    }
+    /* Language flag chips */
+    .lang-card-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .lang-card-contact-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--fg-3);
+    }
+    .lang-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .lang-chip-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-800);
+      box-shadow: var(--shadow-xs);
+    }
+    /* Form card */
+    .pricing-form-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 36px 32px;
+      border: 1.5px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pform-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .pform-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .pform-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-800);
+    }
+    .pform-group label .req { color: var(--danger); margin-left: 2px; }
+    .pform-group input,
+    .pform-group textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--ink-900);
+      background: var(--ink-50);
+      transition: border-color 0.2s, background 0.2s;
+      box-sizing: border-box;
+      appearance: none;
+    }
+    .pform-group input:focus,
+    .pform-group textarea:focus {
+      outline: none;
+      border-color: var(--gold-600);
+      background: #fff;
+    }
+    .pform-group input::placeholder,
+    .pform-group textarea::placeholder { color: var(--fg-3); }
+    .pform-group textarea { min-height: 110px; resize: vertical; }
+    .pform-check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--fg-2);
+      line-height: 1.5;
+    }
+    .pform-check-row input[type="checkbox"] {
+      margin-top: 2px;
+      flex-shrink: 0;
+      width: 16px; height: 16px;
+      accent-color: var(--gold-600);
+      cursor: pointer;
+    }
+    .pform-submit {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      background: var(--gold);
+      color: var(--ink-900);
+      box-shadow: 0 4px 16px rgba(246,197,7,0.35);
+      transition: filter 0.15s;
+      font-family: inherit;
+    }
+    .pform-submit:hover { filter: brightness(0.96); }
+
+    @media (max-width: 900px) {
+      .pricing-contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .pform-row { grid-template-columns: 1fr; }
+    }
 
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 900px) {
@@ -552,8 +735,7 @@
   <!-- ── Hero ──────────────────────────────────────────────── -->
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow reveal">Built for ethnic &amp; local restaurants</span>
-      <h1 class="reveal">Simple plans,<br>easy to understand.</h1>
+      <h1 class="reveal">Which plan is right for you? <span class="h1-dim">Upgrade &amp; cancel anytime.</span></h1>
       <p class="lede reveal">Easy to use. We set everything up for you. And a real expert — who speaks your language — is always here to help.</p>
       <div class="trust-row reveal">
         <span class="trust-chip"><svg class="icon"><use href="#i-check"/></svg> No setup fee</span>
@@ -568,9 +750,19 @@
   <section class="pricing-page-section">
     <div class="container">
       <div class="billing-toggle-wrap reveal">
-        <div class="billing-toggle">
-          <button class="billing-btn active" data-period="monthly">Monthly</button>
-          <button class="billing-btn" data-period="yearly">Yearly <span class="billing-save-badge">2 months free</span></button>
+        <div class="yearly-badge-wrap">
+          <div class="yearly-badge">
+            <span class="yearly-badge-shine"></span>
+            2 MONTHS FREE WITH YEARLY
+          </div>
+        </div>
+        <div class="billing-toggle-row">
+          <span class="toggle-label is-active" id="labelMonthly">Bill monthly</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="billingSwitch">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+          <span class="toggle-label" id="labelYearly">Bill yearly</span>
         </div>
       </div>
 
@@ -583,9 +775,14 @@
           <p class="plan-desc">Everything you need, at our lowest monthly price.</p>
           <div class="plan-price">
             <span class="plan-amount" id="price-standard">$249</span>
-            <span class="plan-per">/mo</span>
+            <div class="plan-subtext">
+              <span>plus 5%</span>
+              <span>per order</span>
+            </div>
           </div>
-          <span class="plan-commission plan-commission-std">+ 5% per order</span>
+          <div class="plan-cta">
+            <a href="contact.html" class="plan-cta-link plan-cta-pro">Get Started</a>
+          </div>
           <div class="plan-good-if">
             <strong>Good if</strong>
             you're just starting or get fewer online orders.
@@ -602,9 +799,6 @@
             <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Free photo shoots 2× a year</li>
             <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> We cover your credit card fees</li>
           </ul>
-          <div class="plan-cta">
-            <a href="contact.html" class="plan-cta-link plan-cta-pro">Get Started</a>
-          </div>
         </div>
 
         <!-- Pro -->
@@ -614,9 +808,10 @@
           <p class="plan-desc">Keep 100% with no commission.</p>
           <div class="plan-price">
             <span class="plan-amount" id="price-pro">$500</span>
-            <span class="plan-per">/mo</span>
           </div>
-          <span class="plan-commission plan-commission-pro">0% — keep every dollar</span>
+          <div class="plan-cta" style="margin-top:0">
+            <a href="contact.html" class="plan-cta-link plan-cta-custom">Talk to us</a>
+          </div>
           <div class="plan-good-if">
             <strong>Good if</strong>
             you sell $5,000+ a month online — it pays for itself.
@@ -627,20 +822,19 @@
             <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Priority setup &amp; dedicated helper</li>
             <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> All Standard features included</li>
           </ul>
-          <div class="plan-cta">
-            <a href="contact.html" class="plan-cta-link plan-cta-custom">Talk to us</a>
-          </div>
         </div>
 
         <!-- Custom -->
         <div class="plan-card">
           <span class="card-chip card-chip-dark">For special needs</span>
           <div class="plan-label">Custom</div>
-          <p class="plan-desc">Need something special? We build a plan just for you.</p>
+          <p class="plan-desc">A plan custom for you</p>
           <div class="plan-price">
-            <span class="plan-amount" style="font-size:1.8rem;">Let's talk</span>
+            <span class="plan-amount">Let's talk</span>
           </div>
-          <span class="plan-commission plan-commission-custom">Made to fit your restaurant</span>
+          <div class="plan-cta" style="margin-top:0">
+            <a href="contact.html" class="plan-cta-link plan-cta-custom">Contact us</a>
+          </div>
           <div class="plan-good-if">
             <strong>Good if</strong>
             you have many locations or special requests.
@@ -652,59 +846,8 @@
             <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Help moving from your old system</li>
             <li><svg class="icon pf-icon pf-icon-check"><use href="#i-check"/></svg> Priority setup with dedicated helper</li>
           </ul>
-          <div class="plan-cta">
-            <a href="contact.html" class="plan-cta-link plan-cta-custom">Contact us</a>
-          </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Comparison table ──────────────────────────────────── -->
-  <section class="compare-section">
-    <div class="container">
-      <div class="section-head section-head-center reveal">
-        <h2>Compare the plans</h2>
-        <p class="lede">Everything is included in every plan — you only choose how you pay.</p>
-      </div>
-      <div class="compare-wrap reveal">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Standard</th>
-              <th class="col-pro">Pro</th>
-              <th>Custom</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Website built to rank on Google</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Ordering (website &amp; app)</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Your own branded app</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Daily social media (human-verified)</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Email + SMS marketing &amp; loyalty</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Google reviews + replies</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>2× / year photo shoots</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Helper who speaks your language</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>We cover your credit card fees</td><td><span class="ct-yes">✓</span></td><td class="col-pro"><span class="ct-yes">✓</span></td><td><span class="ct-yes">✓</span></td></tr>
-            <tr><td>Multiple locations</td><td><span class="ct-no">—</span></td><td class="col-pro"><span class="ct-no">—</span></td><td><span class="ct-yes">✓</span></td></tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Monthly price</td>
-              <td>$249</td>
-              <td class="col-pro">$500</td>
-              <td><span class="ct-custom">Let's talk</span></td>
-            </tr>
-            <tr>
-              <td>Commission per order</td>
-              <td>5%</td>
-              <td class="col-pro">0%</td>
-              <td><span class="ct-custom">Custom</span></td>
-            </tr>
-          </tfoot>
-        </table>
       </div>
     </div>
   </section>
@@ -726,7 +869,11 @@
           <div class="sav-sub" style="color:var(--fg-3)">~28% commission + card fees per month</div>
         </div>
         <div class="sav-card sav-card-eatfuti">
-          <span class="sav-tag"><svg style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Save ~$2,300/mo</span>
+          <span class="sav-tag">
+            <span class="sav-tag-shine"></span>
+            <svg style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Save ~$2,300/mo
+          </span>
+          <img src="assets/logo-symbol-yellow.png" alt="" width="28" height="28">
           <div class="sav-label">EatFuti Pro</div>
           <div class="sav-amount">-$500</div>
           <div class="sav-sub">flat $500/mo · 0% commission · card fees covered</div>
@@ -829,16 +976,95 @@
     </div>
   </section>
 
-  <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="pricing-cta-section">
-    <div class="pricing-cta-card reveal">
-      <div class="pricing-cta-copy">
-        <h2>We set it all up for you.</h2>
-        <p>Get started today and cancel any time. No contracts, no hidden fees.</p>
-        <a href="contact.html" class="btn-prestige btn-prestige-inv">
-          <span class="btn-prestige-label">Get started</span>
-          <span class="btn-prestige-icon"><svg class="icon"><use href="#i-arrow"/></svg></span>
-        </a>
+  <!-- ── Get in touch ─────────────────────────────────────── -->
+  <section class="pricing-contact-section">
+    <div class="container">
+      <div class="pricing-contact-grid">
+
+        <!-- Left column -->
+        <div class="pricing-contact-left reveal">
+          <div class="pricing-hours-chip">
+            <span class="dot"></span>
+            <span>Office Hours: <strong style="color:var(--gold-600)">9am – 5pm, Mon – Fri</strong></span>
+          </div>
+
+          <h2>Get in touch with <em>EatFuti</em></h2>
+
+          <p class="pricing-contact-desc">If you have any questions about growing your restaurant online, or you're ready to get started, reach out today. A real expert — who speaks your language — is always here to help.</p>
+
+          <!-- Contact info blockquote cards -->
+          <div class="contact-info-group">
+            <div class="contact-info-item">
+              <div class="contact-info-title">Call Us</div>
+              <div class="contact-info-value">(515) 493-0243</div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-title">Email Us</div>
+              <div class="contact-info-value">hello@eatfuti.ai</div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-title">Visit Us</div>
+              <div class="contact-info-value">Des Moines, Iowa</div>
+            </div>
+          </div>
+
+          <!-- Language flag chips -->
+          <div class="lang-card-contact">
+            <div class="lang-card-contact-label">We speak your language</div>
+            <div class="lang-chips-row">
+              <span class="lang-chip-flag">🇺🇸 English</span>
+              <span class="lang-chip-flag">🇻🇳 Vietnamese</span>
+              <span class="lang-chip-flag">🇲🇽 Spanish</span>
+              <span class="lang-chip-flag">🇨🇳 Chinese</span>
+              <span class="lang-chip-flag">🇰🇷 Korean</span>
+              <span class="lang-chip-flag">🇯🇵 Japanese</span>
+              <span class="lang-chip-flag">🇸🇴 Somali</span>
+              <span class="lang-chip-flag">🇮🇳 Hindi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column — form -->
+        <div class="pricing-contact-right reveal">
+          <div class="pricing-form-card">
+            <form onsubmit="return false;">
+              <div class="pform-row">
+                <div class="pform-group">
+                  <label>Full name <span class="req">*</span></label>
+                  <input type="text" placeholder="John Smith">
+                </div>
+                <div class="pform-group">
+                  <label>Restaurant name <span class="req">*</span></label>
+                  <input type="text" placeholder="Your restaurant">
+                </div>
+              </div>
+              <div class="pform-row" style="margin-top:14px">
+                <div class="pform-group">
+                  <label>Email address <span class="req">*</span></label>
+                  <input type="email" placeholder="name@email.com">
+                </div>
+                <div class="pform-group">
+                  <label>Telephone number <span class="req">*</span></label>
+                  <input type="tel" placeholder="(555) 000-0000">
+                </div>
+              </div>
+              <div class="pform-group" style="margin-top:14px">
+                <label>Subject <span class="req">*</span></label>
+                <input type="text" placeholder="What's your query?">
+              </div>
+              <div class="pform-group" style="margin-top:14px">
+                <label>Message <span class="req">*</span></label>
+                <textarea placeholder="Tell us about your restaurant..."></textarea>
+              </div>
+              <div class="pform-check-row" style="margin-top:4px">
+                <input type="checkbox" id="pformUpdates">
+                <label for="pformUpdates">Keep me updated with tips, insights, and occasional offers. I understand I can opt out anytime.</label>
+              </div>
+              <button type="submit" class="pform-submit" style="margin-top:4px">Submit</button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -913,18 +1139,27 @@
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
   }
 
-  var billingBtns = document.querySelectorAll('.billing-btn');
-  var priceStandard = document.getElementById('price-standard');
-  var pricePro = document.getElementById('price-pro');
-  billingBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      billingBtns.forEach(function(b) { b.classList.remove('active'); });
-      this.classList.add('active');
-      var yearly = this.dataset.period === 'yearly';
-      priceStandard.textContent = yearly ? '$208' : '$249';
-      pricePro.textContent = yearly ? '$417' : '$500';
-    });
-  });
+  var billingSwitch  = document.getElementById('billingSwitch');
+  var labelMonthly   = document.getElementById('labelMonthly');
+  var labelYearly    = document.getElementById('labelYearly');
+  var priceStandard  = document.getElementById('price-standard');
+  var pricePro       = document.getElementById('price-pro');
+
+  function updateBilling() {
+    var yearly = billingSwitch.checked;
+    priceStandard.textContent = yearly ? '$208' : '$249';
+    pricePro.textContent      = yearly ? '$417' : '$500';
+    labelMonthly.classList.toggle('is-active', !yearly);
+    labelYearly.classList.toggle('is-active',  yearly);
+  }
+
+  if (billingSwitch) {
+    billingSwitch.addEventListener('change', updateBilling);
+    // Labels click
+    labelMonthly.addEventListener('click', function() { billingSwitch.checked = false; updateBilling(); });
+    labelYearly.addEventListener('click',  function() { billingSwitch.checked = true;  updateBilling(); });
+    updateBilling();
+  }
 
   document.querySelectorAll('.faq-q').forEach(function(btn) {
     btn.addEventListener('click', function() {
