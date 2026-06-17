@@ -462,199 +462,27 @@
     }
     .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
 
-    /* ── Get in touch (2-col contact) ───────────────────────── */
-    .pricing-contact-section {
-      background: var(--bg);
-      padding-block: clamp(64px, 8vw, 96px);
-    }
-    .pricing-contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-    .pricing-contact-left {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-    .pricing-hours-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      background: #fff;
-      border: 1.5px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--fg-2);
-      width: fit-content;
-      box-shadow: var(--shadow-xs);
-    }
-    .pricing-hours-chip .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--emerald-500);
-      flex-shrink: 0;
-    }
-    .pricing-contact-left h2 {
-      font-size: clamp(1.9rem, 3.5vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin: 0;
-      color: var(--ink-900);
-    }
-    .pricing-contact-left h2 em {
-      font-style: italic;
-      color: var(--gold-600);
-    }
-    .pricing-contact-desc {
-      font-size: 15px;
-      color: var(--fg-2);
-      line-height: 1.65;
-      margin: 0;
-      max-width: 460px;
-    }
-    /* Blockquote-style contact info items */
-    .contact-info-group {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .contact-info-item {
-      padding-left: 16px;
-      border-left: 3px solid var(--line);
-    }
-    .contact-info-title {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--ink-900);
-      margin-bottom: 3px;
-    }
-    .contact-info-value {
-      font-size: 14px;
-      color: var(--fg-2);
-    }
-    /* Language flag chips */
-    .lang-card-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .lang-card-contact-label {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      color: var(--fg-3);
-    }
-    .lang-chips-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .lang-chip-flag {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 12px;
-      background: #fff;
-      border: 1.5px solid var(--line);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink-800);
-      box-shadow: var(--shadow-xs);
-    }
-    /* Form card */
-    .pricing-form-card {
-      background: #fff;
-      border-radius: 24px;
-      padding: 36px 32px;
-      border: 1.5px solid var(--line);
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .pform-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .pform-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .pform-group label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink-800);
-    }
-    .pform-group label .req { color: var(--danger); margin-left: 2px; }
-    .pform-group input,
-    .pform-group textarea {
-      width: 100%;
-      padding: 11px 13px;
-      border: 1.5px solid var(--line);
-      border-radius: 10px;
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--ink-900);
-      background: var(--ink-50);
-      transition: border-color 0.2s, background 0.2s;
-      box-sizing: border-box;
-      appearance: none;
-    }
-    .pform-group input:focus,
-    .pform-group textarea:focus {
-      outline: none;
-      border-color: var(--gold-600);
-      background: #fff;
-    }
-    .pform-group input::placeholder,
-    .pform-group textarea::placeholder { color: var(--fg-3); }
-    .pform-group textarea { min-height: 110px; resize: vertical; }
-    .pform-check-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--fg-2);
-      line-height: 1.5;
-    }
-    .pform-check-row input[type="checkbox"] {
-      margin-top: 2px;
-      flex-shrink: 0;
-      width: 16px; height: 16px;
-      accent-color: var(--gold-600);
-      cursor: pointer;
-    }
-    .pform-submit {
-      display: block;
-      width: 100%;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 15px;
+    /* ── Final CTA ──────────────────────────────────────────── */
+    .pricing-cta-section { background: #ffffff; padding: 0; }
+    .pricing-cta-card {
+      background: #141413;
+      padding: clamp(64px, 8vw, 96px) clamp(24px, 5vw, 64px);
       text-align: center;
-      border: none;
-      cursor: pointer;
-      background: var(--gold);
-      color: var(--ink-900);
-      box-shadow: 0 4px 16px rgba(246,197,7,0.35);
-      transition: filter 0.15s;
-      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .pform-submit:hover { filter: brightness(0.96); }
-
-    @media (max-width: 900px) {
-      .pricing-contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .pform-row { grid-template-columns: 1fr; }
+    .pricing-cta-card::before {
+      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 360px;
+      background: radial-gradient(ellipse, rgba(246,197,7,0.14) 0%, transparent 70%);
+      pointer-events: none;
     }
+    .pricing-cta-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 720px; }
+    .pricing-cta-card h2 { color: #fff; margin: 0 0 16px; font-size: clamp(30px, 4vw, 48px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
+    .pricing-cta-card p { color: rgba(255,255,255,0.6); margin: 0 0 32px; max-width: 440px; font-size: 16px; }
 
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 900px) {
@@ -976,95 +804,16 @@
     </div>
   </section>
 
-  <!-- ── Get in touch ─────────────────────────────────────── -->
-  <section class="pricing-contact-section">
-    <div class="container">
-      <div class="pricing-contact-grid">
-
-        <!-- Left column -->
-        <div class="pricing-contact-left reveal">
-          <div class="pricing-hours-chip">
-            <span class="dot"></span>
-            <span>Office Hours: <strong style="color:var(--gold-600)">9am – 5pm, Mon – Fri</strong></span>
-          </div>
-
-          <h2>Get in touch with <em>EatFuti</em></h2>
-
-          <p class="pricing-contact-desc">If you have any questions about growing your restaurant online, or you're ready to get started, reach out today. A real expert — who speaks your language — is always here to help.</p>
-
-          <!-- Contact info blockquote cards -->
-          <div class="contact-info-group">
-            <div class="contact-info-item">
-              <div class="contact-info-title">Call Us</div>
-              <div class="contact-info-value">(515) 493-0243</div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-info-title">Email Us</div>
-              <div class="contact-info-value">hello@eatfuti.ai</div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-info-title">Visit Us</div>
-              <div class="contact-info-value">Des Moines, Iowa</div>
-            </div>
-          </div>
-
-          <!-- Language flag chips -->
-          <div class="lang-card-contact">
-            <div class="lang-card-contact-label">We speak your language</div>
-            <div class="lang-chips-row">
-              <span class="lang-chip-flag">🇺🇸 English</span>
-              <span class="lang-chip-flag">🇻🇳 Vietnamese</span>
-              <span class="lang-chip-flag">🇲🇽 Spanish</span>
-              <span class="lang-chip-flag">🇨🇳 Chinese</span>
-              <span class="lang-chip-flag">🇰🇷 Korean</span>
-              <span class="lang-chip-flag">🇯🇵 Japanese</span>
-              <span class="lang-chip-flag">🇸🇴 Somali</span>
-              <span class="lang-chip-flag">🇮🇳 Hindi</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right column — form -->
-        <div class="pricing-contact-right reveal">
-          <div class="pricing-form-card">
-            <form onsubmit="return false;">
-              <div class="pform-row">
-                <div class="pform-group">
-                  <label>Full name <span class="req">*</span></label>
-                  <input type="text" placeholder="John Smith">
-                </div>
-                <div class="pform-group">
-                  <label>Restaurant name <span class="req">*</span></label>
-                  <input type="text" placeholder="Your restaurant">
-                </div>
-              </div>
-              <div class="pform-row" style="margin-top:14px">
-                <div class="pform-group">
-                  <label>Email address <span class="req">*</span></label>
-                  <input type="email" placeholder="name@email.com">
-                </div>
-                <div class="pform-group">
-                  <label>Telephone number <span class="req">*</span></label>
-                  <input type="tel" placeholder="(555) 000-0000">
-                </div>
-              </div>
-              <div class="pform-group" style="margin-top:14px">
-                <label>Subject <span class="req">*</span></label>
-                <input type="text" placeholder="What's your query?">
-              </div>
-              <div class="pform-group" style="margin-top:14px">
-                <label>Message <span class="req">*</span></label>
-                <textarea placeholder="Tell us about your restaurant..."></textarea>
-              </div>
-              <div class="pform-check-row" style="margin-top:4px">
-                <input type="checkbox" id="pformUpdates">
-                <label for="pformUpdates">Keep me updated with tips, insights, and occasional offers. I understand I can opt out anytime.</label>
-              </div>
-              <button type="submit" class="pform-submit" style="margin-top:4px">Submit</button>
-            </form>
-          </div>
-        </div>
-
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section class="pricing-cta-section">
+    <div class="pricing-cta-card reveal">
+      <div class="pricing-cta-copy">
+        <h2>We set it all up for you.</h2>
+        <p>Get started today and cancel any time. No contracts, no hidden fees.</p>
+        <a href="contact.html" class="btn-prestige btn-prestige-inv">
+          <span class="btn-prestige-label">Get started</span>
+          <span class="btn-prestige-icon"><svg class="icon"><use href="#i-arrow"/></svg></span>
+        </a>
       </div>
     </div>
   </section>

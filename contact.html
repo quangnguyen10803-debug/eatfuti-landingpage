@@ -9,34 +9,119 @@
   <link rel="icon" href="assets/logo-symbol-yellow.png" type="image/png">
   <link rel="stylesheet" href="landing.css">
   <style>
-    /* ── Contact hero (2-col: form + sidebar) ──────────────── */
+    /* ── Contact hero (info-left + form-right) ─────────────── */
     .contact-hero {
       padding-block: clamp(56px, 8vw, 96px);
     }
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 56px;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
       align-items: start;
     }
 
-    /* Form side */
-    .contact-form-side {}
-    .contact-eyebrow { margin-bottom: 16px; display: block; }
+    /* Left info side */
+    .contact-info-side {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .contact-hours-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--fg-2);
+      width: fit-content;
+      box-shadow: var(--shadow-xs);
+    }
+    .contact-hours-chip .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+      flex-shrink: 0;
+    }
     .contact-h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.06;
-      margin: 0 0 16px;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--ink-900);
     }
-    .contact-h1 em { font-style: normal; color: var(--gold-600); }
+    .contact-h1 em { font-style: italic; color: var(--gold-600); }
     .contact-lede {
       color: var(--fg-2);
-      font-size: 17px;
-      line-height: 1.6;
-      margin: 0 0 32px;
-      max-width: 480px;
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0;
+      max-width: 460px;
+    }
+
+    /* Blockquote-style contact info */
+    .contact-info-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cic-item {
+      padding-left: 16px;
+      border-left: 3px solid var(--gold-600);
+    }
+    .cic-text strong {
+      font-size: 15px;
+      font-weight: 700;
+      display: block;
+      color: var(--ink-900);
+      margin-bottom: 3px;
+    }
+    .cic-text span { font-size: 14px; color: var(--fg-2); }
+
+    /* Language flag chips */
+    .lang-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .lang-card-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--fg-3);
+    }
+    .lang-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .lang-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-800);
+      box-shadow: var(--shadow-xs);
+    }
+
+    /* Right form side */
+    .contact-form-side {}
+    .contact-form-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 36px 32px;
+      border: 1.5px solid var(--line);
+      box-shadow: var(--shadow-sm);
     }
     .contact-form { display: flex; flex-direction: column; gap: 0; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -46,148 +131,146 @@
       font-weight: 700;
       color: var(--ink-800);
     }
+    .form-label .req { color: var(--danger); margin-left: 2px; }
     .form-input,
     .form-select,
     .form-textarea {
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 14px;
       color: var(--ink-900);
-      background: #fff;
-      border: 1.5px solid rgba(20,20,19,0.14);
-      border-radius: 12px;
-      padding: 12px 16px;
+      background: var(--ink-50);
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 13px;
       width: 100%;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.15s, background 0.15s;
       outline: none;
+      box-sizing: border-box;
     }
     .form-input:focus,
     .form-select:focus,
     .form-textarea:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(246,197,7,0.2);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(246,197,7,0.15);
     }
     .form-input::placeholder,
-    .form-textarea::placeholder { color: var(--fg-4); }
+    .form-textarea::placeholder { color: var(--fg-3); }
     .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%239F9A91' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
-    .form-textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+    .form-textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+    .form-check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--fg-2);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .form-check-row input[type="checkbox"] {
+      margin-top: 2px;
+      flex-shrink: 0;
+      width: 16px; height: 16px;
+      accent-color: var(--gold-600);
+      cursor: pointer;
+    }
     .form-submit-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 16px 28px;
-      background: var(--ink-900);
-      color: #FCF7ED;
+      padding: 14px 20px;
+      background: var(--gold);
+      color: var(--ink-900);
       border: none;
       border-radius: 14px;
       font-family: var(--font-body);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       width: 100%;
-      transition: background 0.15s, box-shadow 0.2s;
-      margin-top: 6px;
+      transition: filter 0.15s;
+      box-shadow: 0 4px 16px rgba(246,197,7,0.35);
     }
-    .form-submit-btn:hover { background: var(--ink-800); box-shadow: 0 6px 20px rgba(20,20,19,0.2); }
+    .form-submit-btn:hover { filter: brightness(0.96); }
     .form-submit-btn .icon { width: 17px; height: 17px; }
-    .form-note {
-      font-size: 12px;
-      color: var(--fg-3);
-      text-align: center;
-      margin-top: 10px;
-    }
 
-    /* Info side */
-    .contact-info-side {
+    /* ── What happens next (horizontal timeline) ────────────── */
+    .next-section { background: #fff; }
+    .next-steps { display: flex; flex-direction: column; gap: 0; }
+
+    /* Horizontal line + 3 dots */
+    .next-timeline {
+      position: relative;
+      height: 12px;
+    }
+    .ntl-line {
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      height: 1.5px;
+      background: var(--line);
+      transform: translateY(-50%);
+    }
+    .ntl-dots {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      position: relative;
+      z-index: 1;
     }
-    .contact-info-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 24px 22px;
-      box-shadow: var(--shadow-sm);
-    }
-    .cic-title {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.10em;
-      color: var(--fg-3);
-      margin: 0 0 14px;
-    }
-    .cic-items { display: flex; flex-direction: column; gap: 12px; }
-    .cic-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .cic-icon {
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      background: var(--gold);
-      display: flex; align-items: center; justify-content: center;
+    .ntl-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--ink-900);
       flex-shrink: 0;
     }
-    .cic-icon .icon { width: 15px; height: 15px; color: var(--ink-900); }
-    .cic-text strong { font-size: 14px; font-weight: 700; display: block; color: var(--ink-900); }
-    .cic-text span { font-size: 13px; color: var(--fg-2); }
 
-    /* Language card */
-    .lang-card {
-      background: var(--ink-900);
-      border-radius: 20px;
-      padding: 24px 22px;
-      color: #fff;
-    }
-    .lang-card h4 { margin: 0 0 8px; color: #fff; font-size: 16px; }
-    .lang-card p { margin: 0; font-size: 13px; color: rgba(252,247,237,0.65); line-height: 1.55; }
-    .lang-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 14px;
-    }
-    .lang-pill {
-      padding: 4px 10px;
-      background: rgba(246,197,7,0.15);
-      border: 1px solid rgba(246,197,7,0.3);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    /* ── What happens next ──────────────────────────────────── */
-    .next-section { background: #fff; }
-    .next-steps {
+    /* 3-column content grid below timeline */
+    .next-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      text-align: center;
+      gap: 0;
     }
-    .next-step {
+    .next-item {
       display: flex;
       flex-direction: column;
+      gap: 12px;
+      padding-top: 0;
+    }
+    .next-item--l { align-items: flex-start; text-align: left; }
+    .next-item--c { align-items: center;     text-align: center; }
+    .next-item--r { align-items: flex-end;   text-align: right; }
+
+    /* Vertical dashed connector from dot to chip */
+    .next-vline {
+      width: 0;
+      height: 36px;
+      border-left: 1.5px dashed rgba(20,20,19,0.2);
+    }
+    .next-item--r .next-vline { border-left: none; border-right: 1.5px dashed rgba(20,20,19,0.2); }
+
+    /* Chip-style step title */
+    .step-chip {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      background: none;
-      padding: 0;
-    }
-    .next-num {
-      width: 56px; height: 56px;
+      padding: 7px 16px;
+      background: #fff;
+      border: 1.5px solid var(--line);
       border-radius: 999px;
-      background: rgba(246, 197, 7, 0.15);
-      border: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--gold-600);
-      flex-shrink: 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-900);
+      box-shadow: 0 2px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.05);
+      white-space: nowrap;
     }
-    .next-step h4 { margin: 0; font-size: 16px; font-weight: 800; }
-    .next-step p { margin: 0; font-size: 14px; color: var(--fg-2); line-height: 1.55; }
+    .next-item p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--fg-2);
+      line-height: 1.55;
+      max-width: 280px;
+    }
 
     /* ── Why EatFuti cards ──────────────────────────────────── */
     .why-section { background: var(--bg); }
@@ -240,14 +323,16 @@
 
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      .contact-info-side { display: grid; grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-form-card { padding: 28px 22px; }
     }
     @media (max-width: 680px) {
-      .next-steps,
       .why-grid { grid-template-columns: 1fr; }
-      .contact-info-side { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
+      .next-timeline { display: none; }
+      .next-grid { grid-template-columns: 1fr; gap: 28px; }
+      .next-item--l, .next-item--c, .next-item--r { align-items: flex-start; text-align: left; }
+      .next-item--r .next-vline { border-right: none; border-left: 1.5px dashed rgba(20,20,19,0.2); }
     }
   </style>
 </head>
@@ -316,106 +401,101 @@
 
 <main>
 
-  <!-- ── Hero + Form ───────────────────────────────────────── -->
+  <!-- ── Hero ────────────────────────────────────────────────── -->
   <section class="contact-hero">
     <div class="container">
       <div class="contact-grid">
 
-        <!-- Form -->
-        <div class="contact-form-side reveal">
-          <span class="eyebrow contact-eyebrow">Talk to a real person</span>
-          <h1 class="contact-h1">Let's grow your restaurant<br><em>together.</em></h1>
-          <p class="contact-lede">Tell us about your restaurant — a real expert who speaks your language will reach out today.</p>
+        <!-- Left: info -->
+        <div class="contact-info-side reveal">
+          <div class="contact-hours-chip">
+            <span class="dot"></span>
+            <span>Office Hours: <strong style="color:var(--gold-600)">9am – 5pm, Mon – Fri</strong></span>
+          </div>
 
-          <form class="contact-form" action="#" method="post" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="cf-name">Your name</label>
-                <input class="form-input" id="cf-name" name="name" type="text" placeholder="Your name" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="cf-restaurant">Restaurant name</label>
-                <input class="form-input" id="cf-restaurant" name="restaurant" type="text" placeholder="Restaurant name" required>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="cf-phone">Phone</label>
-                <input class="form-input" id="cf-phone" name="phone" type="tel" placeholder="(555) 000-0000">
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="cf-cuisine">Cuisine</label>
-                <select class="form-select" id="cf-cuisine" name="cuisine">
-                  <option value="">Select your cuisine</option>
-                  <option>Vietnamese</option>
-                  <option>Chinese</option>
-                  <option>Thai</option>
-                  <option>Korean</option>
-                  <option>Mexican</option>
-                  <option>Indian</option>
-                  <option>Japanese</option>
-                  <option>Other</option>
-                </select>
+          <h1 class="contact-h1">Get in touch with <em>EatFuti</em></h1>
+
+          <p class="contact-lede">If you have any questions about growing your restaurant, or you're ready to get started, reach out today. A real expert — who speaks your language — is always here to help.</p>
+
+          <!-- Blockquote-style contact info -->
+          <div class="contact-info-card">
+            <div class="cic-item">
+              <div class="cic-text">
+                <strong>Call Us</strong>
+                <span>(515) 493-0243</span>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="cf-email">Email</label>
-              <input class="form-input" id="cf-email" name="email" type="email" placeholder="hello@yourrestaurant.com" required>
+            <div class="cic-item">
+              <div class="cic-text">
+                <strong>Email Us</strong>
+                <span>hello@eatfuti.ai</span>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="cf-message">What do you need help with?</label>
-              <textarea class="form-textarea" id="cf-message" name="message" placeholder="Tell us about your restaurant and what you'd like to grow…"></textarea>
+            <div class="cic-item">
+              <div class="cic-text">
+                <strong>Visit Us</strong>
+                <span>700 Locust St Ste 304, Des Moines, IA 50309</span>
+              </div>
             </div>
-            <button class="form-submit-btn" type="submit">
-              Get my free restaurant scan <svg class="icon"><use href="#i-arrow"/></svg>
-            </button>
-            <p class="form-note">No pressure · we set it all up for you</p>
-          </form>
+          </div>
+
+          <!-- Language flag chips -->
+          <div class="lang-card">
+            <div class="lang-card-label">We speak your language</div>
+            <div class="lang-pills">
+              <span class="lang-pill">🇺🇸 English</span>
+              <span class="lang-pill">🇻🇳 Vietnamese</span>
+              <span class="lang-pill">🇲🇽 Spanish</span>
+              <span class="lang-pill">🇨🇳 Chinese</span>
+              <span class="lang-pill">🇰🇷 Korean</span>
+              <span class="lang-pill">🇯🇵 Japanese</span>
+              <span class="lang-pill">🇸🇴 Somali</span>
+              <span class="lang-pill">🇮🇳 Hindi</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Info sidebar -->
-        <div class="contact-info-side reveal">
-
-          <div class="contact-info-card">
-            <p class="cic-title">Reach us directly</p>
-            <div class="cic-items">
-              <div class="cic-item">
-                <div class="cic-icon"><svg class="icon"><use href="#i-phone"/></svg></div>
-                <div class="cic-text">
-                  <strong>Call our local team</strong>
-                  <span>(515) 493-0243</span>
+        <!-- Right: form card -->
+        <div class="contact-form-side reveal">
+          <div class="contact-form-card">
+            <form class="contact-form" action="#" method="post" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cf-name">Full name <span class="req">*</span></label>
+                  <input class="form-input" id="cf-name" name="name" type="text" placeholder="John Smith" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cf-restaurant">Restaurant name <span class="req">*</span></label>
+                  <input class="form-input" id="cf-restaurant" name="restaurant" type="text" placeholder="Your restaurant" required>
                 </div>
               </div>
-              <div class="cic-item">
-                <div class="cic-icon"><svg class="icon"><use href="#i-mail"/></svg></div>
-                <div class="cic-text">
-                  <strong>Email</strong>
-                  <span>hello@eatfuti.ai</span>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cf-email">Email address <span class="req">*</span></label>
+                  <input class="form-input" id="cf-email" name="email" type="email" placeholder="name@email.com" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cf-phone">Telephone number</label>
+                  <input class="form-input" id="cf-phone" name="phone" type="tel" placeholder="(555) 000-0000">
                 </div>
               </div>
-              <div class="cic-item">
-                <div class="cic-icon"><svg class="icon"><use href="#i-map-pin"/></svg></div>
-                <div class="cic-text">
-                  <strong>Visit</strong>
-                  <span>700 Locust St Ste 304,<br>Des Moines, IA 50309</span>
-                </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-subject">Subject <span class="req">*</span></label>
+                <input class="form-input" id="cf-subject" name="subject" type="text" placeholder="What's your query?">
               </div>
-            </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-message">Message <span class="req">*</span></label>
+                <textarea class="form-textarea" id="cf-message" name="message" placeholder="Tell us about your restaurant..."></textarea>
+              </div>
+              <div class="form-check-row">
+                <input type="checkbox" id="cf-updates">
+                <label for="cf-updates">Keep me updated with tips, insights, and occasional offers. I understand I can opt out anytime.</label>
+              </div>
+              <button class="form-submit-btn" type="submit">
+                Submit <svg class="icon"><use href="#i-arrow"/></svg>
+              </button>
+            </form>
           </div>
-
-          <div class="lang-card">
-            <h4>We speak your language</h4>
-            <p>Get support from a real expert who understands your restaurant — in your own language.</p>
-            <div class="lang-pills">
-              <span class="lang-pill">Tiếng Việt</span>
-              <span class="lang-pill">English</span>
-              <span class="lang-pill">中文</span>
-              <span class="lang-pill">한국어</span>
-              <span class="lang-pill">Español</span>
-              <span class="lang-pill">and more</span>
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -430,21 +510,36 @@
         <h2>Simple, friendly, no pressure.</h2>
       </div>
       <div class="next-steps reveal">
-        <div class="next-step">
-          <div class="next-num">1</div>
-          <h4>We call you today</h4>
-          <p>A real expert who speaks your language learns about your restaurant and what you want to grow.</p>
+
+        <!-- Horizontal line with 3 stops -->
+        <div class="next-timeline">
+          <div class="ntl-line"></div>
+          <div class="ntl-dots">
+            <span class="ntl-dot"></span>
+            <span class="ntl-dot"></span>
+            <span class="ntl-dot"></span>
+          </div>
         </div>
-        <div class="next-step">
-          <div class="next-num">2</div>
-          <h4>We build it for you</h4>
-          <p>Website, app, menu, Google and photos — all set up for you. You don't touch a single setting.</p>
+
+        <!-- Step content -->
+        <div class="next-grid">
+          <div class="next-item next-item--l">
+            <div class="next-vline"></div>
+            <span class="step-chip">We call you today</span>
+            <p>A real expert who speaks your language learns about your restaurant and what you want to grow.</p>
+          </div>
+          <div class="next-item next-item--c">
+            <div class="next-vline"></div>
+            <span class="step-chip">We build it for you</span>
+            <p>Website, app, menu, Google and photos — all set up for you. You don't touch a single setting.</p>
+          </div>
+          <div class="next-item next-item--r">
+            <div class="next-vline"></div>
+            <span class="step-chip">You go live &amp; grow</span>
+            <p>Start taking commission-free orders and bringing customers back — every single day.</p>
+          </div>
         </div>
-        <div class="next-step">
-          <div class="next-num">3</div>
-          <h4>You go live &amp; grow</h4>
-          <p>Start taking commission-free orders and bringing customers back — every single day.</p>
-        </div>
+
       </div>
     </div>
   </section>
